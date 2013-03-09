@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Category</Name>
+	<Description>Category</Description>
+	<SetName>Categories</SetName>
+	<Descriptor>Category</Descriptor>
+	<SetDescriptor>Categories</SetDescriptor>
+	<SqlTable>categories</SqlTable>
+	<Properties>
+
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Title</Name>
+			<Description>Title</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Description>Description</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdParent</Name>
+			<Description>Parent Category</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Category</Reference>
+		</Property>
+
+		<Property>
+			<Name>CategoryType</Name>
+			<Description>Type of Category</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Visibility</Name>
+			<Description>Visibility</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+	</Properties>
+</Entity>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Entity>
+	<Name>Cuenta</Name>
+	<Description>Cuenta Contable</Description>
+	<SetName>Cuentas</SetName>
+	<Descriptor>Cuenta Contable</Descriptor>
+	<SetDescriptor>Cuentas Contables</SetDescriptor>
+	<SqlTable>Cuentas</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Codigo</Name>
+			<Description>Código de Cuenta</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(32)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Descripcion</Name>
+			<Description>Descripción</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Sinonimo</Name>
+			<Description>Sinónimo</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(32)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Nivel</Name>
+			<Description>Nivel</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdPlanDeCuentas</Name>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdCuentaMadre</Name>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+	</Properties>
+</Entity>

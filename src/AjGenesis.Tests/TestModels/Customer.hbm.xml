@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<hibernate-mapping>
+
+	<class name="com.ajlopez.ajfirstexample.model.Customer" table="customers">
+		<id name="Id" column="Id" type="int" unsaved-value="0">
+			<generator class="native"/>
+		</id>
+		<property column="Name" type="string" name="Name"/>
+		<property column="Address" type="string" name="Address"/>
+		<property column="Notes" type="string" name="Notes"/>
+	</class>
+</hibernate-mapping>

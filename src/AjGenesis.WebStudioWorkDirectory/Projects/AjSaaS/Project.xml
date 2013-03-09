@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Project>
+	<Name>AjSaaS</Name>
+	<Description>A sample Software as a Service application</Description>
+	<Company>ajlopez.com</Company>
+	<CompanyName>ajlopez</CompanyName>
+	<SystemName>AjSaaS</SystemName>
+	<Language>En</Language>
+	<Prefix>AjSaaS</Prefix>
+	<OpenSource>true</OpenSource>
+	<Model>
+		<Entities>
+			<Entity Source="Entities/Tenant.xml"/>
+			<Entity Source="Entities/Provider.xml"/>
+			<Entity Source="Entities/User.xml"/>
+			<Entity Source="Entities/Application.xml"/>
+			<Entity Source="Entities/Role.xml"/>
+			<Entity Source="Entities/UserRole.xml"/>
+			<Entity Source="Entities/TenantApplication.xml"/>
+			<Entity Source="Entities/Entity.xml"/>
+			<Entity Source="Entities/EntityProperty.xml"/>
+			<Entity Source="Entities/EntityApplication.xml"/>
+			<Entity Source="Entities/Contact.xml"/>
+			<Entity Source="Entities/ToDoItem.xml"/>
+		</Entities>
+		<Lists>
+			<List Entity="Tenant"/>
+			<List Entity="User"/>
+			<List Entity="Application"/>
+			<List Entity="Role"/>
+			<List Entity="UserRole"/>
+			<List Entity="TenantApplication"/>
+		</Lists>
+		<Forms>
+			<Form Entity="Tenant"/>
+			<Form Entity="User"/>
+			<Form Entity="Application"/>
+			<Form Entity="Role"/>
+			<Form Entity="UserRole"/>
+			<Form Entity="TenantApplication"/>
+		</Forms>
+		<Views>
+			<View Entity="Tenant"/>
+			<View Entity="User"/>
+			<View Entity="Application"/>
+			<View Entity="Role"/>
+			<View Entity="UserRole"/>
+			<View Entity="TenantApplication"/>
+		</Views>
+	</Model>
+</Project>

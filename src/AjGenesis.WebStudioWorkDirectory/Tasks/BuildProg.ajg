@@ -1,0 +1,4 @@
+<#
+include "Tasks/Build${Technology.Programming.Dialect}.ajg"
+
+#>

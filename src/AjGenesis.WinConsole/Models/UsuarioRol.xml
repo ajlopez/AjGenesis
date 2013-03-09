@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Entity>
+	<Name>UsuarioRol</Name>
+	<Description>Rol de Usuario</Description>
+	<SetName>UsuariosRoles</SetName>
+	<Descriptor>Rol de Usuario</Descriptor>
+	<SetDescriptor>Roles de Usuarios</SetDescriptor>
+	<SqlTable>UsuariosRoles</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdUsuario</Name>
+			<Description>Usuario</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdRol</Name>
+			<Description>Rol</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+	</Properties>
+</Entity>

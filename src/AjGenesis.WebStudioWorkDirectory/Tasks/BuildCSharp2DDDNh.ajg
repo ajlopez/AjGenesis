@@ -1,0 +1,224 @@
+<#
+
+include "Templates/Utilities.tpl"
+include "Templates/CSharp2DDDNh/UtilitiesCs.tpl"
+include "Templates/CSharp2DDDNh/CSharpFunctions.tpl"
+
+message "Creating Directories..."
+
+FileManager.CreateDirectory(Project.BuildDir)
+FileManager.CreateDirectory("${Project.BuildDir}/Sql")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/AjNHibernate")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/AjNHibernate/Properties")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Libraries")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Domain")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Domain/Entities")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Domain/Queries")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Domain/Services")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Domain/Repositories")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Domain/Mapping")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Domain/Properties")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Application")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Application/Services")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Application/Contracts")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Application/Properties")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/App_Themes")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/App_Themes/Default")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/Admin")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/MasterPages")
+
+message "Configuring NHibernate..."
+
+if not Technology.NHibernate then
+	Technology.NHibernate = CreateObject()
+end if
+
+if not Technology.NHibernate.Dialect then
+	if Technology.Database.Dialect = "MsSql" then
+		Technology.NHibernate.Dialect = "NHibernate.Dialect.MsSql2000Dialect"
+	end if
+end if
+
+if not Technology.NHibernate.Driver then
+	if Technology.Database.Dialect = "MsSql" then
+		Technology.NHibernate.Driver = "NHibernate.Driver.SqlClientDriver"
+	end if
+end if
+
+if not Technology.NHibernate.ConnectionString then
+	if Technology.Database.Dialect = "MsSql" then
+		Technology.NHibernate.ConnectionString = "server=${Technology.Database.Host};database=${Technology.Database.Name};uid=${Technology.Database.Username};pwd=${Technology.Database.Password}"
+	end if
+end if
+
+message "Defining Solution and Projects..."
+
+Project.Solution = CreateObject()
+Project.Solution.Guid = "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC"
+Project.Solution.WebGuid = "E24C65DC-7377-472B-9ABA-BC803B73C61A"
+
+Project.Solution.Projects = CreateList()
+
+message "Defining Domain Project..."
+
+PrjDomain = CreateObject()
+PrjDomain.Name = "${Project.Name}.Domain"
+PrjDomain.Directory = "${Project.BuildDir}/Src/${Project.Name}.Domain"
+PrjDomain.Includes = CreateList()
+PrjDomain.Projects = CreateList()
+PrjDomain.Guid = CreateGuid()
+PrjDomain.COMGuid = CreateGuid()
+
+Project.Solution.Projects.Add(PrjDomain)
+
+PrjApplication = CreateObject()
+PrjApplication.Name = "${Project.Name}.Application"
+PrjApplication.Directory = "${Project.BuildDir}/Src/${Project.Name}.Application"
+PrjApplication.Includes = CreateList()
+PrjApplication.Projects = CreateList()
+PrjApplication.Guid = CreateGuid()
+PrjApplication.COMGuid = CreateGuid()
+
+Project.Solution.Projects.Add(PrjApplication)
+
+PrjWeb = CreateObject()
+PrjWeb.Name = "${Project.Name}.WebClient"
+PrjWeb.Directory = "${Project.BuildDir}/Src/${Project.Name}.WebClient"
+PrjWeb.Includes = CreateList()
+PrjWeb.Projects = CreateList()
+PrjWeb.Guid = CreateGuid()
+PrjWeb.COMGuid = CreateGuid()
+PrjWeb.ProjectType = "Web"
+
+Project.WebProject=PrjWeb
+
+Project.Solution.Projects.Add(PrjWeb)
+
+PrjAjNh = CreateObject()
+PrjAjNh.Name = "AjNHibernate"
+PrjAjNh.Directory = "${Project.BuildDir}/Src/AjNHibernate"
+PrjAjNh.Includes = CreateList()
+PrjAjNh.Libraries = CreateList()
+PrjAjNh.Projects = CreateList()
+PrjAjNh.Guid = CreateGuid()
+PrjAjNh.COMGuid = CreateGuid()
+PrjAjNh.UseWeb = true
+
+PrjAjNh.Includes.Add(CreateFileCs("Repository"))
+PrjAjNh.Includes.Add(CreateFileCs("SessionFactory"))
+PrjAjNh.Includes.Add(CreateFileCs("SessionHttpModule"))
+TransformerManager.Transform("Templates/CSharp2DDDNh/SessionFactory.tpl", "${PrjAjNh.Directory}/SessionFactory.cs", Environment)
+FileManager.CopyFile("${WorkingDir}SourceCode/AjNHibernate/Repository.cs","${PrjAjNh.Directory}/Repository.cs")
+FileManager.CopyFile("${WorkingDir}SourceCode/AjNHibernate/SessionHttpModule.cs","${PrjAjNh.Directory}/SessionHttpModule.cs")
+
+if Technology.NHibernate.LibraryDirectory then
+	PrjAjNh.Libraries.Add(CreateFileLib("NHibernate","${Technology.NHibernate.LibraryDirectory}\NHibernate.dll"))
+else
+	PrjAjNh.Libraries.Add(CreateFileLib("NHibernate","..\Libraries\NHibernate.dll"))
+end if
+
+Project.Solution.Projects.Add(PrjAjNh)
+
+PrjDomain.Projects.Add(PrjAjNh)
+
+PrjApplication.Projects.Add(PrjDomain)
+
+PrjWeb.Projects.Add(PrjDomain)
+PrjWeb.Projects.Add(PrjApplication)
+
+message "Completing Entities..."
+
+for each Entity in Project.Model.Entities
+	PrintLine "Entity " + Entity.Name
+
+	Entity.VarName = Entity.Name.ToLower()
+	Entity.VarSetName = Entity.SetName.ToLower()
+	
+	for each Property in Entity.Properties
+		if not Property.Description then
+			Property.Description = Property.Name
+		end if
+		Property.VarName = Property.Name.ToLower()
+		Property.CsType = CSharpType(Property)
+	end for
+end for
+
+message "Generating Web Site..."
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/HomeAspx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Default.aspx",Environment)
+TransformerManager.Transform("Templates/CSharp2DDDNh/HomeAspxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Default.aspx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/HeaderAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Header.ascx",Environment)
+TransformerManager.Transform("Templates/CSharp2DDDNh/HeaderAscxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Header.ascx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/FooterAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Footer.ascx",Environment)
+TransformerManager.Transform("Templates/CSharp2DDDNh/FooterAscxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Footer.ascx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/TitleAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Title.ascx",Environment)
+TransformerManager.Transform("Templates/CSharp2DDDNh/TitleAscxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Title.ascx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/SubtitleAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Subtitle.ascx",Environment)
+TransformerManager.Transform("Templates/CSharp2DDDNh/SubtitleAscxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Subtitle.ascx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/GlobalAsax.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Global.asax",Environment)
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/MasterPageCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/MasterPages/MainMasterPage.master",Environment)
+TransformerManager.Transform("Templates/CSharp2DDDNh/MasterPageCodeCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/MasterPages/MainMasterPage.master.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/WebConfig.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Web.config",Environment)
+TransformerManager.Transform("Templates/CSharp2DDDNh/StylesCss.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/App_Themes/Default/Styles.css",Environment)
+
+message "Processing Entities..."
+
+for each Entity in Project.Model.Entities
+	PrintLine "Entity " + Entity.Name
+	
+	WebPage = CreateObject()
+
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntityCs.tpl","${Project.BuildDir}/Src/${Project.Name}.Domain/Entities/${Entity.Name}.cs",Environment)
+	PrjDomain.Includes.Add(CreateFileCs("Entities\${Entity.Name}"))
+
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntityQueryCs.tpl","${Project.BuildDir}/Src/${Project.Name}.Domain/Queries/${Entity.Name}Query.cs",Environment)
+	PrjDomain.Includes.Add(CreateFileCs("Queries\${Entity.Name}Query"))
+
+	TransformerManager.Transform("Templates/CSharp2DDDNh/DomainServiceCs.tpl","${Project.BuildDir}/Src/${Project.Name}.Domain/Services/${Entity.Name}Manager.cs",Environment)
+	PrjDomain.Includes.Add(CreateFileCs("Services\${Entity.Name}Manager"))
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntityRepositoryCs.tpl","${Project.BuildDir}/Src/${Project.Name}.Domain/Repositories/${Entity.Name}Repository.cs",Environment)
+	PrjDomain.Includes.Add(CreateFileCs("Repositories\${Entity.Name}Repository"))
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntityNh.tpl","${Project.BuildDir}/Src/${Project.Name}.Domain/Mapping/${Entity.Name}.hbm.xml",Environment)
+	PrjDomain.Includes.Add(CreateFileType("Mapping\"&Entity.Name,"hbm.xml"))
+
+	WebPage.Directory = "Admin"
+	WebPage.Prefix = "Admin_"
+
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntityWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.Name}.aspx",Environment)
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntityCodeWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.Name}.aspx.cs",Environment)
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntitySetWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.SetName}.aspx",Environment)	
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntitySetCodeWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.SetName}.aspx.cs",Environment)
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntityFormWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.Name}Update.aspx",Environment)
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntityFormCodeWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.Name}Update.aspx.cs",Environment)
+
+	TransformerManager.Transform("Templates/CSharp2DDDNh/ApplicationServiceCs.tpl","${Project.BuildDir}/Src/${Project.Name}.Application/Services/${Entity.Name}Service.cs",Environment)
+	PrjApplication.Includes.Add(CreateFileCs("Services\${Entity.Name}Service"))
+	TransformerManager.Transform("Templates/CSharp2DDDNh/EntityInfoCs.tpl","${Project.BuildDir}/Src/${Project.Name}.Application/Contracts/${Entity.Name}Info.cs",Environment)
+	PrjApplication.Includes.Add(CreateFileCs("Contracts\${Entity.Name}Info"))
+end for
+
+WebPage = CreateObject()
+
+WebPage.Directory = "Admin"
+WebPage.Prefix = "Admin_"
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/DefaultAspx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/Default.aspx",Environment)
+TransformerManager.Transform("Templates/CSharp2DDDNh/DefaultAspxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/Default.aspx.cs",Environment)
+
+for each CsProject in Project.Solution.Projects where CsProject.ProjectType<>"Web"
+	TransformerManager.Transform("Templates/CSharp2DDDNh/CsProject.tpl", "${CsProject.Directory}/${CsProject.Name}.csproj", Environment)
+	TransformerManager.Transform("Templates/CSharp2DDDNh/AssemblyInfoCs.tpl", "${CsProject.Directory}/Properties/AssemblyInfo.cs", Environment)
+end for
+
+TransformerManager.Transform("Templates/CSharp2DDDNh/Solution.tpl", "${Project.BuildDir}/Src/${Project.Name}.sln", Environment)
+
+#>

@@ -1,0 +1,15 @@
+<#
+Sub f()
+	Print 1
+End Sub
+
+Function Factorial(x)
+	if x<=1 then
+		return 1
+	end if
+	
+	return x * Factorial(x-1)
+End Function
+
+Print Factorial(4)
+#>

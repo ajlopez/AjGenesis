@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Tenant</Name>
+	<Description>Tenant</Description>
+	<SetName>Tenants</SetName>
+	<Descriptor>Tenant</Descriptor>
+	<SetDescriptor>Tenants</SetDescriptor>
+	<SqlTable>tenants</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>TenantName</Name>
+			<Description>Tenant Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(20)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Name</Name>
+			<Description>Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+	</Properties>
+</Entity>

@@ -1,0 +1,82 @@
+
+PrintLine "Creating AjGenesis Project ${Project.Name}"
+
+include "Templates/EntityFunctions.tpl"
+include "Templates/Utilities.tpl"
+
+' Default Values
+
+if not Project.Title then
+	Project.Title = Project.Name
+end if
+
+if not Project.Description then
+	Project.Description = Project.Name
+end if
+
+if not Project.Version then
+	Project.Version = "1.0.*"
+end if
+
+if not Project.SystemName then
+	Project.SystemName = Project.Name
+end if
+
+if not Project.Company then
+	Project.Company = "ajlopez.com"
+end if
+
+if not Project.CompanyName then
+	Project.CompanyName = "ajlopez"
+end if
+
+' AjGenesis Project Directories
+
+BuildDir = "Projects/${Project.Name}"
+
+FileManager.CreateDirectory(BuildDir)
+FileManager.CreateDirectory(BuildDir & "/Entities")
+FileManager.CreateDirectory(BuildDir & "/Lists")
+FileManager.CreateDirectory(BuildDir & "/Views")
+FileManager.CreateDirectory(BuildDir & "/Forms")
+FileManager.CreateDirectory(BuildDir & "/Technologies")
+
+' AjGenesis Project File
+
+TransformerManager.Transform("Prototypes/Project.tpl", "${BuildDir}/Project.xml", Environment)
+
+' AjGenesis Technology and Build Files
+
+for each Technology in Project.Technologies
+	TransformerManager.Transform("Prototypes/Technologies/${Technology.Name}.tpl", "${BuildDir}/Technologies/${Technology.Name}.xml", Environment)
+	TransformerManager.Transform("Prototypes/Builds/${Technology.Name}.tpl", "${Project.Name}${Technology.Name}.build", Environment)
+end for
+
+for each Entity in Project.Entities
+	if not Entity.Plural then
+		Entity.Plural = Entity.Name & "s"
+	end if
+	if not Entity.Description then
+		Entity.Description = Entity.Name
+	end if
+	if not Entity.Descriptor then
+		Entity.Descriptor = Entity.Name
+	end if
+	if not Entity.SetDescriptor then
+		Entity.SetDescriptor = Entity.Plural
+	end if
+	if not Entity.SetName then
+		Entity.SetName = Entity.Plural
+	end if
+	if not Entity.SqlTable then
+		Entity.SqlTable = Entity.Plural.ToLower()
+	end if
+	if not Entity.Prototype then
+		Entity.Prototype = "Entity"
+	end if
+
+	PrintLine "Create Entity " & Entity.Name
+
+	TransformerManager.Transform("Prototypes/Entities/${Entity.Prototype}.tpl", "${BuildDir}/Entities/${Entity.Name}.xml", Environment)
+end for
+

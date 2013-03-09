@@ -1,0 +1,11 @@
+<Technology>
+	<Programming>
+		<Dialect>VbNet2DDDNh</Dialect>
+	</Programming>
+	<Database>
+		<Dialect>MsSql</Dialect>
+		<Name>AjTestDDD</Name>
+		<Username>sa</Username>
+		<Host>(local)</Host>
+	</Database>
+</Technology>

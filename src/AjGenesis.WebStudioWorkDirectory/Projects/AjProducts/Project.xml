@@ -1,0 +1,12 @@
+<Project>
+	<Name>AjProducts</Name>
+	<Description>AjProducts Example</Description>
+	<Domain>com.ajlopez</Domain>
+	<CompanyName>ajlopez</CompanyName>
+	<Model>
+		<Entities>
+			<Entity Source="Entities/Category.xml"/>
+			<Entity Source="Entities/Product.xml"/>
+		</Entities>
+	</Model>
+</Project>

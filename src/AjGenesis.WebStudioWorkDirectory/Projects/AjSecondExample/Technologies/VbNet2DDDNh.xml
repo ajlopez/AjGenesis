@@ -1,0 +1,12 @@
+<Technology>
+	<Programming>
+		<Dialect>VbNet2DDDNh</Dialect>
+	</Programming>
+	<Database>
+		<Dialect>MsSql</Dialect>
+		<Name>AjSecondExample</Name>
+		<Username>sa</Username>
+		<Prefix>ajse_</Prefix>
+		<Host>(local)</Host>
+	</Database>
+</Technology>

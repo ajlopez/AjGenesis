@@ -1,0 +1,55 @@
+<#
+
+PrintLine "Creating Directories"
+
+FileManager.CreateDirectory("${Project.BuildDir}")
+FileManager.CreateDirectory("${Project.BuildDir}/Web")
+FileManager.CreateDirectory("${Project.BuildDir}/Web/includes")
+
+if Technology.Programming.Strategy="Service" then
+	FileManager.CreateDirectory("${Project.BuildDir}/Web/includes/services")
+end if
+
+if Technology.Programming.Strategy="Model" then
+	FileManager.CreateDirectory("${Project.BuildDir}/Web/includes/model")
+	FileManager.CreateDirectory("${Project.BuildDir}/Web/includes/data")
+	FileManager.CreateDirectory("${Project.BuildDir}/Web/includes/services")
+end if
+
+FileManager.CopyDirectory("${WorkingDir}SourceCode/AjFwkPhp","${Project.BuildDir}/Web")
+
+PrintLine "Creating PHP Project ${Project.Name}"
+
+for each Entity in Project.Model.Entities	
+'	TransformerManager.Transform("Templates/Php/Entity.tpl","${Project.BuildDir}/Web/${Entity.Name}.php",Environment)
+'	TransformerManager.Transform("Templates/Php/EntityClass.tpl","${Project.BuildDir}/Web/includes/model/${Entity.Name}.class.php",Environment)
+	if Technology.Programming.Strategy="Functions" then
+		TransformerManager.Transform("Templates/Php/EntityFunctions.tpl","${Project.BuildDir}/Web/includes/${Entity.Name}Functions.inc.php",Environment)
+	end if
+'	TransformerManager.Transform("Templates/Php/EntityData.tpl","${Project.BuildDir}/Web/includes/data/${Entity.Name}Data.class.php",Environment)
+'	TransformerManager.Transform("Templates/Php/EntityService.tpl","${Project.BuildDir}/Web/includes/services/${Entity.Name}Service.class.php",Environment)
+end for
+
+for each List in Project.Model.Lists
+	TransformerManager.Transform("Templates/Php/EntityList.tpl","${Project.BuildDir}/Web/${List.Entity.Name}List.php",Environment)
+end for
+
+for each Form in Project.Model.Forms
+	TransformerManager.Transform("Templates/Php/EntityForm.tpl","${Project.BuildDir}/Web/${Form.Entity.Name}Form.php",Environment)
+	TransformerManager.Transform("Templates/Php/EntityUpdate.tpl","${Project.BuildDir}/Web/${Form.Entity.Name}Update.php",Environment)
+end for
+
+for each View in Project.Model.Views
+	TransformerManager.Transform("Templates/Php/EntityView.tpl","${Project.BuildDir}/Web/${View.Entity.Name}View.php",Environment)
+	Entity = View.Entity
+	TransformerManager.Transform("Templates/Php/EntityDelete.tpl","${Project.BuildDir}/Web/${View.Entity.Name}Delete.php",Environment)
+end for
+
+TransformerManager.Transform("Templates/Php/Index.tpl","${Project.BuildDir}/Web/index.php",Environment)
+TransformerManager.Transform("Templates/Php/Menu.tpl","${Project.BuildDir}/Web/includes/MenuLeft.inc.php",Environment)
+TransformerManager.Transform("Templates/Php/Configuration.tpl","${Project.BuildDir}/Web/includes/Configuration.inc.php",Environment)
+TransformerManager.Transform("Templates/Php/Enumerations.tpl","${Project.BuildDir}/Web/includes/Enumerations.inc.php",Environment)
+
+FileManager.CopyDirectory("${WorkingDir}SourceCode/PhpWebSite","${Project.BuildDir}/Web")
+
+#>

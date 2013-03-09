@@ -1,0 +1,3 @@
+"${Technology.Database.MySql.Dir}/bin/mysqladmin.exe" --user=${Technology.Database.Username} --force --password=${Technology.Database.Password} drop ${Technology.Database.Name}
+"${Technology.Database.MySql.Dir}/bin/mysqladmin.exe" --user=${Technology.Database.Username} --password=${Technology.Database.Password} create ${Technology.Database.Name}
+"${Technology.Database.MySql.Dir}/bin/mysql" --user=${Technology.Database.Username} --password=${Technology.Database.Password} ${Technology.Database.Name}  <${Project.BuildDir}/Sql/Database.sql

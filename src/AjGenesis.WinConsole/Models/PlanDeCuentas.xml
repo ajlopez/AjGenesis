@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Entity>
+	<Name>PlanDeCuentas</Name>
+	<Description>Plan de Cuentas</Description>
+	<SetName>PlanesDeCuentas</SetName>
+	<Descriptor>Plan De Cuentas</Descriptor>
+	<SetDescriptor>Planes de Cuentas</SetDescriptor>
+	<SqlTable>PlanesDeCuentas</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Descripcion</Name>
+			<Description>Descripción</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdEmpresa</Name>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+	</Properties>
+</Entity>

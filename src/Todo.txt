@@ -1,0 +1,26 @@
+
+- Quick Start Tutorial in English
+- Quick Start Tutorial in Spanish
+
+- Examples Documentation
+
+- Complete AjBasic language specification
+
+- Support for Schemas
+
+- Complete the AjGenesis.Tools.Modeler and AjGenesis.Schemas
+
+- More help pages for AjGenesis Web Studio
+
+- Text DSL
+
+- Support for other model sources
+
+- AjSharp
+
+Angel "Java" Lopez
+http://www.ajlopez.com/
+http://www.ajlopez.com/ajgenesis
+
+
+

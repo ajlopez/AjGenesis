@@ -1,0 +1,8 @@
+
+PrintLine "Generating code..."
+
+include "Tasks/BuildProject.ajg"
+include "Tasks/BuildTechnology.ajg"
+include "Tasks/BuildProg.ajg"
+include "Tasks/BuildSql.ajg"
+

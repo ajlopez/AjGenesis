@@ -1,0 +1,105 @@
+<#
+
+include "Templates/Utilities.tpl"
+include "Templates/JavaDDDHb/JavaFunctions.tpl"
+
+message "Completing Project..."
+
+Strategy = Project.Technology.Strategy
+
+if not Project.PackageName then
+	Project.PackageName = "com.${Project.CompanyName.ToLower()}.${Project.SystemName.ToLower()}"
+end if
+
+if not Project.PackageDirectory then
+	Project.PackageDirectory = "com/${Project.CompanyName.ToLower()}/${Project.SystemName.ToLower()}"
+end if
+
+if Project.Technology.DatabaseDialect="MySql" then
+	if not Project.Technology.Database.JdbcDriver then
+		Project.Technology.Database.JdbcDriver = "org.gjt.mm.mysql.Driver"
+	end if
+	if not Project.Technology.Database.JdbcUrl then
+		Project.Technology.Database.JdbcUrl = "jdbc:mysql://${Project.Technology.Database.Host}/${Project.Technology.Database.Name}"
+	end if
+end if
+
+if not Technology.WebSite then
+	Technology.WebSite = CreateObject()
+end if
+
+if not Technology.WebSite.Name then
+	Technology.WebSite.Name = Project.SystemName.ToLower()
+end if
+
+message "Creating Directories..."
+
+FileManager.CreateDirectory("${Project.BuildDir}")
+FileManager.CreateDirectory("${Project.BuildDir}/Src")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Metadata")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Web")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Web/includes")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/domain")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/domain/entities")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/domain/repositories")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/domain/managers")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/application")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/application/services")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/infrastructure")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/infrastructure/data")
+FileManager.CreateDirectory("${Project.BuildDir}/Libraries")
+
+message "Configuring Hibernate..."
+
+if not Technology.Hibernate then
+	Technology.Hibernate = CreateObject()
+end if
+
+PrintLine "Creating Java Project ${Project.Name}"
+
+TransformerManager.Transform("Templates/JavaDDDHb/HbProperties.tpl","${Project.BuildDir}/Src/hibernate.properties",Environment)
+TransformerManager.Transform("Templates/JavaDDDHb/AjHibernate.tpl","${Project.BuildDir}/Src/Java/com/ajlopez/${Project.SystemName}/AjHibernate.java",Environment)
+TransformerManager.Transform("Templates/JavaDDDHb/AjHibernateFilter.tpl","${Project.BuildDir}/Src/Java/com/ajlopez/${Project.SystemName}/AjHibernateFilter.java",Environment)
+TransformerManager.Transform("Templates/JavaDDDHb/JspHeader.tpl","${Project.BuildDir}/Src/Web/includes/Header.jsp",Environment)
+TransformerManager.Transform("Templates/JavaDDDHb/JspFooter.tpl","${Project.BuildDir}/Src/Web/includes/Footer.jsp",Environment)
+TransformerManager.Transform("Templates/JavaDDDHb/WebXml.tpl","${Project.BuildDir}/Src/Metadata/web.xml",Environment)
+
+TransformerManager.Transform("Templates/JavaDDDHb/AntBuild.tpl","${Project.BuildDir}/build.xml",Environment)
+TransformerManager.Transform("Templates/JavaDDDHb/BuildProperties.tpl","${Project.BuildDir}/build.properties",Environment)
+
+for each Entity in Project.Model.Entities
+	if not Entity.JavaObjectName then
+		Entity.JavaObjectName = JavaName(Entity)
+	end if
+
+	if not Entity.JavaSetName then
+		Entity.JavaSetName = JavaSetName(Entity)
+	end if
+
+	for each Property in Entity.Properties
+		Property.JavaType = JavaType(Property)
+		Property.JavaSqlType = JavaSqlType(Property)
+		Property.JavaName = JavaName(Property)
+	end for
+end for
+
+for each Entity in Project.Model.Entities
+	TransformerManager.Transform("Templates/JavaDDDHb/EntityJava.tpl","${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/domain/entities/${Entity.Name}.java",Environment)
+	TransformerManager.Transform("Templates/JavaDDDHb/EntityHb.tpl","${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/domain/entities/${Entity.Name}.hbm.xml",Environment)
+	TransformerManager.Transform("Templates/JavaDDDHb/EntityRepositoryJava.tpl","${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/domain/repositories/${Entity.Name}Repository.java",Environment)
+	TransformerManager.Transform("Templates/JavaDDDHb/EntityManager.tpl","${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/domain/managers/${Entity.Name}Manager.java",Environment)
+
+	TransformerManager.Transform("Templates/JavaDDDHb/EntityDAO.tpl","${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/infrastructure/data/${Entity.Name}DAO.java",Environment)
+	TransformerManager.Transform("Templates/JavaDDDHb/EntityServices.tpl","${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/application/services/${Entity.Name}Services.java",Environment)
+
+	TransformerManager.Transform("Templates/JavaDDDHb/JspEntityList.tpl","${Project.BuildDir}/Src/Web/${Entity.Name}List.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaDDDHb/JspEntityView.tpl","${Project.BuildDir}/Src/Web/${Entity.Name}View.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaDDDHb/JspEntityForm.tpl","${Project.BuildDir}/Src/Web/${Entity.Name}Form.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaDDDHb/JspEntityUpdate.tpl","${Project.BuildDir}/Src/Web/${Entity.Name}Update.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaDDDHb/JspEntityNewForm.tpl","${Project.BuildDir}/Src/Web/${Entity.Name}NewForm.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaDDDHb/JspEntityInsert.tpl","${Project.BuildDir}/Src/Web/${Entity.Name}Insert.jsp",Environment)
+end for
+
+#>

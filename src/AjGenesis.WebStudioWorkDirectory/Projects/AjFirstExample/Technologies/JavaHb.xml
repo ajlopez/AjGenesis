@@ -1,0 +1,20 @@
+<Technology>
+	<Programming>
+		<Dialect>JavaHb</Dialect>
+		<Strategy>Functions</Strategy>
+	</Programming>
+	<Database>
+		<Dialect>MySql</Dialect>
+		<Name>ajfirstexample</Name>
+		<Username>root</Username>
+		<Host>localhost</Host>
+		<MySql Dir="c:\xampp\mysql"/>
+	</Database>
+	<JDBC>
+		<Driver>com.mysql.jdbc.Driver</Driver>
+		<Subprotocol>mysql</Subprotocol>
+	</JDBC>
+	<Hibernate>
+		<Dialect>org.hibernate.dialect.MySQLDialect</Dialect>
+	</Hibernate>
+</Technology>

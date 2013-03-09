@@ -1,0 +1,12 @@
+<Technology>
+	<Programming>
+		<Dialect>CSharp3</Dialect>
+	</Programming>
+	<Database>
+		<Dialect>MsSql</Dialect>
+		<Name>AjFirstExampleNet3</Name>
+		<Username>sa</Username>
+		<Host>.\SQLEXPRESS</Host>
+		<DataContext>true</DataContext>
+	</Database>
+</Technology>

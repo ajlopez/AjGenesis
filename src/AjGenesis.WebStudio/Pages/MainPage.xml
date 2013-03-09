@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DynamicPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Code>MainPage</Code>
+  <Title>Main</Title>
+  <Content>Welcome to AjGenesis WebStudio, a web interface to open source code generation engine AjGenesis.
+
+Created by [[http://www.ajlopez.com]]</Content>
+</DynamicPage>

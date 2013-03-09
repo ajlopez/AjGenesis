@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Entity>
+	<Name>Pase</Name>
+	<Description>Pase de Minuta Contable</Description>
+	<SetName>Pases</SetName>
+	<Descriptor>Pase de Minuta Contable</Descriptor>
+	<SetDescriptor>Pases de Minuta Contable</SetDescriptor>
+	<SqlTable>Pases</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdMinuta</Name>
+			<Description>Minuta</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Orden</Name>
+			<Description>Orden</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdCuenta</Name>
+			<Description>Cuenta</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>DebeHaber</Name>
+			<Description>Debe o Haber</Description>
+			<Type>Char</Type>
+			<SqlType>char(1)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Importe</Name>
+			<Description>Importe</Description>
+			<Type>Decimal</Type>
+			<SqlType>decimal(16,2)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Detalle</Name>
+			<Description>Detalle</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+	</Properties>
+</Entity>

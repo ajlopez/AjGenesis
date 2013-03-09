@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>ItemTag</Name>
+	<Description>ItemTag</Description>
+	<SetName>ItemsTags</SetName>
+	<Descriptor>ItemTag</Descriptor>
+	<SetDescriptor>ItemsTags</SetDescriptor>
+	<SqlTable>itemstags</SqlTable>
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdItem</Name>
+			<Description>Item</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Item</Reference>
+		</Property>
+
+		<Property>
+			<Name>IdTag</Name>
+			<Description>Tag</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Tag</Reference>
+		</Property>
+	</Properties>
+</Entity>

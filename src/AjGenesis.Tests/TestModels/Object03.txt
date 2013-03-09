@@ -1,0 +1,9 @@
+Entities
+	Entity Customer
+		Description = "Customer Entity"
+	End Entity
+	Entity Supplier
+		Description = "Supplier Entity"
+	End Entity
+End Entities
+

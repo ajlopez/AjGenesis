@@ -1,0 +1,10 @@
+IncludeCode('Utilities\DirectoryUtilities.ajg')
+IncludeCode('Utilities\FileUtilities.ajg')
+IncludeCode('Utilities\TransformUtilities.ajg')
+
+DirectoryCreate(Name)
+DirectoryCreate("${Name}\Models")
+
+FileCopy("${RepositoryPath}\Metamodels\${Metamodel}\Metamodel.xml", "${Name}\Models\Metamodel.xml")
+TransformFile("${RepositoryPath}\Metamodels\${Metamodel}\Project.tpl", "${Name}\Models\Project.xml", TransformerManager, Environment)
+FileCopy("${RepositoryPath}\Metamodels\${Metamodel}\Technologies\${Technology}\Technology.xml", "${Name}\Models\Technology.xml")

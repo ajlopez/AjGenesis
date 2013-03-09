@@ -1,0 +1,23 @@
+<Entity>
+	<Name>NewsCategory</Name>
+	<Description>News Category</Description>
+	<SetName>NewsCategories</SetName>
+	<Descriptor>News Category</Descriptor>
+	<SetDescriptor>News Categories</SetDescriptor>
+	<SqlTable>newscategories</SqlTable>
+	
+	<Properties>
+
+		<Property>
+			<Name>Id</Name>
+			<Type>Id</Type>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+	</Properties>
+</Entity>
+

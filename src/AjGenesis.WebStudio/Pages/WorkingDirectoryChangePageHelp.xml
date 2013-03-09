@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DynamicPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Code>WorkingDirectoryChangePageHelp</Code>
+  <Title>Changing the working directory</Title>
+  <Content>You can change your current [[WorkingDirectory|Working Directory]] at any moment.
+
+If the new working directory doesn't exist, it is created, with the [[ProjectsDirectory|Projects]], [[TemplatesDirectory|Templates]], [[TasksDirectory|Tasks]], [[BuildDirectory|Build]] directories.
+</Content>
+</DynamicPage>

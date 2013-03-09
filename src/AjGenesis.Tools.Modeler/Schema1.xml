@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Schema Name="Test">
+<Root>Project</Root>
+<Name>Test</Name>
+<Types>
+	<Type Name="Project" XmlFile="Project.xml">
+		<Properties>
+			<Property Name="Name"/>
+			<Property Name="Entities" Type="Entities" XmlFile="Entities/Entities.xml"/>
+			<Property Name="Lists" Type="Lists" XmlFile="Lists/Lists.xml"/>
+			<Property Name="Views" Type="Views" XmlFile="Views/Views.xml"/>
+			<Property Name="Forms" Type="Forms" XmlFile="Forms/Forms.xml"/>
+		</Properties>
+	</Type>
+	<Type Name="Entities">
+		<Properties>
+			<Property Name="Entity" Type="Entity" Occurrence="*"/>
+		</Properties>
+	</Type>
+	<Type Name="Entity" XmlFile="Entities/${Name}.xml">
+		<Properties>
+			<Property Name="Name"/>
+			<Property Name="Plural"/>
+			<Property Name="Singular"/>
+			<Property Name="Descriptor"/>
+			<Property Name="SetDescriptor"/>
+			<Property Name="SqlTable"/>
+			<Property Name="Properties" Type="EntityProperties"/>
+		</Properties>
+	</Type>
+</Types>
+</Schema>

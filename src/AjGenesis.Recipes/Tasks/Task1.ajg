@@ -1,0 +1,12 @@
+form = UIManager.CreateInputForm()
+form.Text = "Class Generator Wizard"
+form.AddTextField("Model","Model to use","")
+form.AddTextField("ClassName","Class Name","")
+form.AddFolderField("Target","Target Directory","")
+n = form.ShowDialog()
+if n = 1 then
+	modelfile = form.GetField("Model")
+	if modelfile then
+		ModelManager.LoadModel(modelfile,Environment)
+	end if
+end if

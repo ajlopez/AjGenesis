@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Contact</Name>
+	<Description>Contact</Description>
+	<SetName>Contacts</SetName>
+	<Descriptor>Contact</Descriptor>
+	<SetDescriptor>Contacts</SetDescriptor>
+	<SqlTable>contacts</SqlTable>
+
+	<Properties>
+
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdTenant</Name>
+			<Description>Tenant</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Tenant</Reference>
+		</Property>
+
+		<Property>
+			<Name>IdUser</Name>
+			<Description>User</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>User</Reference>
+		</Property>
+
+		<Property>
+			<Name>LastName</Name>
+			<Description>Last Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>FirstName</Name>
+			<Description>First Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Email</Name>
+			<Description>Email</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Comment</Name>
+			<Description>Comment</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+	</Properties>
+</Entity>

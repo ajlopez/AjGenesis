@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>ToDoItem</Name>
+	<Description>ToDoItem</Description>
+	<SetName>ToDoItems</SetName>
+	<Descriptor>ToDoItem</Descriptor>
+	<SetDescriptor>ToDoItems</SetDescriptor>
+	<SqlTable>todoitems</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdTenant</Name>
+			<Description>Tenant</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Tenant</Reference>
+		</Property>
+
+		<Property>
+			<Name>IdUser</Name>
+			<Description>User</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>User</Reference>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Description>Description</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+
+		<Property>
+			<Name>Detail</Name>
+			<Description>Detail</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Priority</Name>
+			<Description>Priority</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Status</Name>
+			<Description>Status</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>CreationDate</Name>
+			<Description>Creation Date</Description>
+			<Type>DateTime</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+	</Properties>
+
+</Entity>

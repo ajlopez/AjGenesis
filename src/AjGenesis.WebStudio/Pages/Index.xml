@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DynamicPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Code>Index</Code>
+  <Title>Index</Title>
+  <Content>This is test page.
+
+You can edit any of these pages. There are saved at ~/Pages directory.
+
+Other test [[Test|Test Page]]
+
+&lt;h2&gt;Subtitle&lt;/h2&gt;
+
+A page
+
+&lt;h3&gt;Subtitle 2&lt;/h3&gt;
+
+A paragraph
+
+&lt;h4&gt;Subtitle 2&lt;/h4&gt;</Content>
+</DynamicPage>

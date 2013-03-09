@@ -1,0 +1,6 @@
+<Project>
+  <Name>HelloWorld</Name>
+  <Description>HelloWorld Example</Description>
+  <GenerateTask>GenerateHelloWorld</GenerateTask>
+  <Message>Hello World</Message>
+</Project>

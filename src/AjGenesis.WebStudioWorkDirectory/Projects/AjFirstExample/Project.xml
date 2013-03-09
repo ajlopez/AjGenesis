@@ -1,0 +1,25 @@
+<Project>
+	<Name>AjFirstExample</Name>
+	<Description>First Example using AjGenesis</Description>
+	<Prefix>AjFE</Prefix>
+	<Domain>com.ajlopez</Domain>
+	<CompanyName>ajlopez</CompanyName>
+	<Model>
+		<Entities>
+			<Entity Source="Entities/Customer.xml"/>
+			<Entity Source="Entities/Supplier.xml"/>
+		</Entities>
+		<Lists>
+			<List Entity="Customer"/>
+			<List Entity="Supplier"/>
+		</Lists>
+		<Forms>
+			<Form Entity="Customer"/>
+			<Form Entity="Supplier"/>
+		</Forms>
+		<Views>
+			<View Entity="Customer"/>
+			<View Entity="Supplier"/>
+		</Views>
+	</Model>
+</Project>

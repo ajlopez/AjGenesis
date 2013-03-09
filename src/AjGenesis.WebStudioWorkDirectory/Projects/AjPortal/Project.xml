@@ -1,0 +1,14 @@
+<Project>
+	<Name>AjPortal</Name>
+	<Description>AjPortal using AjGenesis</Description>
+	<Domain>com.ajlopez</Domain>
+	<CompanyName>ajlopez</CompanyName>
+	<Model>
+		<Entities>
+			<Entity Source="Entities/News.xml"/>
+			<Entity Source="Entities/NewsCategory.xml"/>
+			<Entity Source="Entities/Product.xml"/>
+			<Entity Source="Entities/ProductCategory.xml"/>
+		</Entities>
+	</Model>
+</Project>

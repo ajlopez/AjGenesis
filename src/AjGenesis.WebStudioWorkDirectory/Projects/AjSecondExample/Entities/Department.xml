@@ -1,0 +1,23 @@
+<Entity>
+	<Name>Department</Name>
+	<Description>Department Entity</Description>
+	<SetName>Departments</SetName>
+	<Descriptor>Department</Descriptor>
+	<SetDescriptor>Departments</SetDescriptor>
+	<SqlTable>departments</SqlTable>
+	
+	<Properties>
+
+		<Property>
+			<Name>Id</Name>
+			<Type>Id</Type>
+		</Property>
+
+		<Property>
+			<Name>Name</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+	</Properties>
+</Entity>

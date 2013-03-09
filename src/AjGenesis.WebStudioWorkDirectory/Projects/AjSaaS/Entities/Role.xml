@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Role</Name>
+	<Description>Role</Description>
+	<SetName>Roles</SetName>
+	<Descriptor>Role</Descriptor>
+	<SetDescriptor>Roles</SetDescriptor>
+	<SqlTable>roles</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>RoleName</Name>
+			<Description>Role Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(40)</SqlType>
+			<Required>true</Required>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Description>Description</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+
+		<Property>
+			<Name>IdApplication</Name>
+			<Description>Application</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Application</Reference>
+		</Property>
+
+	</Properties>
+
+</Entity>

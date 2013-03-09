@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DynamicPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Code>HelpIndexPage</Code>
+  <Title>Help Index</Title>
+  <Content>This is the help index page for AjGenesis WebStudio.
+
+[[AjGenesis|AjGenesis Project]]
+
+[[GenerateCode|Generating Code]]
+
+[[BlogPosts|Blog Posts about the Project]]
+
+[[AjGenesisStudio|Genesis Studio: a WinForm IDE]]
+
+[[PageEditPageHelp|Help on editing dynamic pages]]
+
+[[MainPage|The main page is dynamic]]
+
+[[HowTos|How to...]]</Content>
+</DynamicPage>

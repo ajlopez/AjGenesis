@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>EntityProperty</Name>
+	<Description>Entity Property</Description>
+	<SetName>EntityProperties</SetName>
+	<Descriptor>Entity Property</Descriptor>
+	<SetDescriptor>Entity Properties</SetDescriptor>
+	<SqlTable>entityproperties</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdEntity</Name>
+			<Description>Entity</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Entity</Reference>
+		</Property>
+
+		<Property>
+			<Name>IdTenant</Name>
+			<Description>Tenant</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Tenant</Reference>
+		</Property>
+
+		<Property>
+			<Name>Name</Name>
+			<Description>Property Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Description>Description</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Title</Name>
+			<Description>Property Title</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>PropertyType</Name>
+			<Description>Property Type</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>PropertyLength</Name>
+			<Description>Property Length</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>PropertyPre</Name>
+			<Description>Property Length</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>PropertyOrder</Name>
+			<Description>Property Order</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+	</Properties>
+
+</Entity>
+

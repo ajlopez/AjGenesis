@@ -1,0 +1,33 @@
+
+if not Name then
+	error "Parameter Name is required"
+end if
+
+if not Metamodel then
+	Metamodel = "Entities1"
+end if
+
+if not Technology then
+	error "Parameter Technology is required"
+end if
+
+if not Command then
+	error "Parameter Command is required"
+end if
+
+commandfile = System.IO.Path.Combine("${RepositoryPath}\Metamodels\${Metamodel}\Technologies\${Technology}", Command + ".ajg")
+
+if not System.IO.File.Exists(commandfile) then
+	commandfile = System.IO.Path.Combine("${RepositoryPath}\Metamodels\${Metamodel}", Command + ".ajg")
+end if
+
+if not System.IO.File.Exists(commandfile) then
+	commandfile = System.IO.Path.Combine("${RepositoryPath}", Command + ".ajg")
+end if
+
+if not System.IO.File.Exists(commandfile) then
+	error "Command '${commandfile}' unknown"
+end if
+
+IncludeCode(commandfile)
+

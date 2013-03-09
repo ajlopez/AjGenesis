@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Project>
+	<Name>AjTest</Name>
+	<Description>AjTest</Description>
+	<Company>ajlopez.com</Company>
+	<CompanyName>ajlopez</CompanyName>
+	<SystemName>AjTest</SystemName>
+	<Language>En</Language>
+	<Model>
+		<Entities>
+			<Entity Source="Entities/Employee.xml"/>
+			<Entity Source="Entities/Department.xml"/>
+			<Entity Source="Entities/Supplier.xml"/>
+			<Entity Source="Entities/Customer.xml"/>
+			<Entity Source="Entities/Project.xml"/>
+			<Entity Source="Entities/Task.xml"/>
+			<Entity Source="Entities/Skill.xml"/>
+			<Entity Source="Entities/EmployeeSkill.xml"/>
+		</Entities>
+		<Lists>
+			<List Entity="Employee"/>
+			<List Entity="Department"/>
+			<List Entity="Supplier"/>
+			<List Entity="Customer"/>
+			<List Entity="Project"/>
+			<List Entity="Task"/>
+			<List Entity="Skill"/>
+			<List Entity="EmployeeSkill"/>
+		</Lists>
+		<Forms>
+			<Form Entity="Employee"/>
+			<Form Entity="Department"/>
+			<Form Entity="Supplier"/>
+			<Form Entity="Customer"/>
+			<Form Entity="Project"/>
+			<Form Entity="Task"/>
+			<Form Entity="Skill"/>
+			<Form Entity="EmployeeSkill"/>
+		</Forms>
+		<Views>
+			<View Entity="Employee"/>
+			<View Entity="Department"/>
+			<View Entity="Supplier"/>
+			<View Entity="Customer"/>
+			<View Entity="Project"/>
+			<View Entity="Task"/>
+			<View Entity="Skill"/>
+			<View Entity="EmployeeSkill"/>
+		</Views>
+	</Model>
+</Project>

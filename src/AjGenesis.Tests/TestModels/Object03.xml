@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+  An Entity with Properties
+  -->
+<Entities>
+  <Entity Name="Customer">
+    <Description>A Customer</Description>
+    <Properties>
+      <Property Name="Id" Type="Id"/>
+      <Property Name="Name" Type="Text"/>
+      <Property Name="Address" Type="Text"/>
+    </Properties>
+  </Entity>
+  <Entity Name="Supplier">
+    <Description>A Supplier</Description>
+    <Properties>
+      <Property Name="Id" Type="Id"/>
+      <Property Name="Name" Type="Text"/>
+      <Property Name="Address" Type="Text"/>
+    </Properties>
+  </Entity>
+</Entities>

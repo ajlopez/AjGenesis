@@ -1,0 +1,12 @@
+form = UIManager.CreateInputForm()
+form.Text = "Class Generator Wizard"
+form.AddFileField("Model","Model to use","")
+form.AddFileField("FileName","File to Generate","")
+n = form.ShowDialog()
+
+if n = 1 then
+	ModelFile = form.GetField("Model")
+	FileName = form.GetField("FileName")
+	ModelManager.LoadModel(ModelFile,Environment)
+	TransformerManager.Transform("Templates/HelloWorldVb.tpl",FileName,Environment)
+end if

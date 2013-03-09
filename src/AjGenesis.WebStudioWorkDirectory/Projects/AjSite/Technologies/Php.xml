@@ -1,0 +1,14 @@
+<Technology>
+	<Programming>
+		<Dialect>Php</Dialect>
+		<Strategy>Functions</Strategy>
+	</Programming>
+	<Database>
+		<Dialect>MySql</Dialect>
+		<Name>AjSite</Name>
+		<Username>root</Username>
+		<Host>localhost</Host>
+		<MySql Dir="c:\xampp\mysql"/>
+		<Prefix>ajsite_</Prefix>
+	</Database>
+</Technology>

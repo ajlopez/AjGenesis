@@ -1,0 +1,28 @@
+PrintLine "Generating HelloWorld..."
+
+if not Project.BuildDir then
+	Project.BuildDir = "${WorkingDir}Build/${Project.Name}"
+end if
+
+if not Project.Title then
+	Project.Title = Project.Name
+end if
+
+if not Project.Version then
+	Project.Version = "1.0.*"
+end if
+
+if not Project.Language then
+	Project.Language = "en"
+end if
+
+if not Project.SystemName then
+	Project.SystemName = Project.Name
+end if
+
+PrintLine "Creating Directory ${Project.BuildDir}"
+
+FileManager.CreateDirectory("${Project.BuildDir}")
+
+Include "Tasks\BuildHelloWorld${Technology.Name}.ajg"
+

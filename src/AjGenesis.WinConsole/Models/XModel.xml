@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Project>
+	<Name>AjContab</Name>
+	<Description>AjContab 0.1</Description>
+	<Company>ajlopez.com</Company>
+	<Models>
+	<Model>
+		<Entities>
+			<Entity Source="Empresa.xml"/>
+			<Entity Source="PlanDeCuentas.xml"/>
+			<Entity Source="Cuenta.xml"/>
+			<Entity Source="Ejercicio.xml"/>
+			<Entity Source="Periodo.xml"/>
+			<Entity Source="Minuta.xml"/>
+			<Entity Source="Pase.xml"/>
+			<Entity Source="Usuario.xml"/>
+			<Entity Source="Rol.xml"/>
+			<Entity Source="UsuarioRol.xml"/>
+			<Entity Source="EmpresaUsuario.xml"/>
+		</Entities>
+	</Model>
+	</Models>
+</Project>

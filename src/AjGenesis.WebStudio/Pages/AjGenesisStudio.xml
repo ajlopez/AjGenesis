@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DynamicPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Code>AjGenesisStudio</Code>
+  <Title>Genesis Studio</Title>
+  <Content>Jonathan Cisneros has written a nice WinForm-based IDE for [[AjGenesis]].
+
+[[image:http://www.ajlopez.com/images/articles/genesisstudio03.png]]
+
+More about the IDE:
+
+[[http://ajlopez.wordpress.com/2007/12/24/genesis-studio-an-ide-for-ajgenesis/|Genesis Studio: an AjGenesis IDE]]
+
+[[http://msmvps.com/blogs/lopez/archive/2007/12/24/genesis-studio-una-ide-para-ajgenesis.aspx|Genesis Studio: una IDE para AjGenesis]] (Spanish)
+
+You can download from the files section on [[http://groups.google.com/group/codegeneration?hl=es|Code Generation Google Group]]. In short, it will be available in a separate CodePlex project.</Content>
+</DynamicPage>

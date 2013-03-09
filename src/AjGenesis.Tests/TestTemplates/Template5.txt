@@ -1,0 +1,19 @@
+<#
+Sub f()
+	Print 1
+End Sub
+
+Function Factorial(x)
+	result = 1
+	k = 1
+	
+	while k<=x
+		result = result * k
+		k = k + 1
+	end while
+	
+	return result
+End Function
+
+Print Factorial(4)
+#>

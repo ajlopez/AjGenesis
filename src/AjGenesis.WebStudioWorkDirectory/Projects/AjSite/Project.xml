@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Project>
+	<Name>AjSite</Name>
+	<Description>AjSite</Description>
+	<Company>ajlopez.com</Company>
+	<CompanyName>ajlopez</CompanyName>
+	<SystemName>AjSite</SystemName>
+	<Language>En</Language>
+	<Model>
+		<Entities>
+			<Entity Source="Entities/User.xml"/>
+			<Entity Source="Entities/Item.xml"/>
+			<Entity Source="Entities/Category.xml"/>
+			<Entity Source="Entities/ItemCategory.xml"/>
+			<Entity Source="Entities/Tag.xml"/>
+			<Entity Source="Entities/ItemTag.xml"/>
+			<Entity Source="Entities/Comment.xml"/>
+			<Entity Source="Entities/Vote.xml"/>
+			<Entity Source="Entities/Visit.xml"/>
+		</Entities>
+		<Lists>
+			<List Entity="User"/>
+			<List Entity="Item"/>
+			<List Entity="Category"/>
+			<List Entity="ItemCategory"/>
+			<List Entity="Tag"/>
+			<List Entity="ItemTag"/>
+			<List Entity="Comment"/>
+			<List Entity="Vote"/>
+			<List Entity="Visit"/>
+		</Lists>
+		<Forms>
+			<Form Entity="User"/>
+			<Form Entity="Item"/>
+			<Form Entity="Category"/>
+			<Form Entity="ItemCategory"/>
+			<Form Entity="Tag"/>
+			<Form Entity="ItemTag"/>
+			<Form Entity="Comment"/>
+			<Form Entity="Vote"/>
+			<Form Entity="Visit"/>
+		</Forms>
+		<Views>
+			<View Entity="User"/>
+			<View Entity="Item"/>
+			<View Entity="Category"/>
+			<View Entity="ItemCategory"/>
+			<View Entity="Tag"/>
+			<View Entity="ItemTag"/>
+			<View Entity="Comment"/>
+			<View Entity="Vote"/>
+			<View Entity="Visit"/>
+		</Views>
+	</Model>
+</Project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DynamicPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Code>BlogPosts</Code>
+  <Title>Blog Posts</Title>
+  <Content>Although the project lacks full documentation, there are many blog posts in the web describing its ideas, concepts, features and examples.
+
+This is the current list (January 2008):
+
+(To Be Done)
+</Content>
+</DynamicPage>

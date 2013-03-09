@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Supplier</Name>
+	<Description>Supplier</Description>
+	<SetName>Suppliers</SetName>
+	<Descriptor>Supplier</Descriptor>
+	<SetDescriptor>Suppliers</SetDescriptor>
+	<SqlTable>suppliers</SqlTable>
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Name</Name>
+			<Description>Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+		<Property>
+			<Name>Address</Name>
+			<Description>Address</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+	</Properties>
+</Entity>

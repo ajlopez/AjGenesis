@@ -1,0 +1,13 @@
+<Technology>
+	<Programming>
+		<Dialect>Php</Dialect>
+		<Strategy>Functions</Strategy>
+	</Programming>
+	<Database>
+		<Dialect>MySql</Dialect>
+		<Name>ajsecondexample</Name>
+		<Username>root</Username>
+		<Host>localhost</Host>
+		<MySql Dir="c:\xampp\mysql"/>
+	</Database>
+</Technology>

@@ -1,0 +1,12 @@
+<Technology>
+	<Programming>
+		<Dialect>CSharp2</Dialect>
+	</Programming>
+	<Database>
+		<Dialect>MsSql</Dialect>
+		<Name>AjSite</Name>
+		<Username>sa</Username>
+		<Host>(local)</Host>
+		<Prefix>ajsite_</Prefix>
+	</Database>
+</Technology>

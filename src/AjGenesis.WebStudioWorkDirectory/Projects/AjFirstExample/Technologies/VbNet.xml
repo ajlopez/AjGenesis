@@ -1,0 +1,12 @@
+<Technology>
+	<Programming>
+		<Dialect>VbNet</Dialect>
+	</Programming>
+	<Database>
+		<Dialect>MsSql</Dialect>
+		<Name>AjFirstExample</Name>
+		<Username>sa</Username>
+		<Prefix>ajfe_</Prefix>
+		<Host>(local)</Host>
+	</Database>
+</Technology>

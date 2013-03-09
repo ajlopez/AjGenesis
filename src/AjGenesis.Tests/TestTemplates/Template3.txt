@@ -1,0 +1,6 @@
+<#
+Sub f()
+	Print 1
+End Sub
+f()
+#>

@@ -1,0 +1,27 @@
+<Technology>
+	<Programming>
+		<Dialect>JavaDDDHb</Dialect>
+	</Programming>
+	<WebSite>
+		<Name>ajtestdddhb</Name>
+	</WebSite>
+	<Database>
+		<Dialect>MySql</Dialect>
+		<Name>ajfirstexample</Name>
+		<Username>root</Username>
+		<Host>localhost</Host>
+		<MySql Dir="c:\xampp\mysql"/>
+	</Database>
+	<JDBC>
+		<Driver>com.mysql.jdbc.Driver</Driver>
+		<Subprotocol>mysql</Subprotocol>
+	</JDBC>
+	<Hibernate>
+		<Dialect>org.hibernate.dialect.MySQLDialect</Dialect>
+	</Hibernate>
+	<Tomcat Dir="c:\jakarta-tomcat-5.0.27">
+		<Port>8080</Port>
+		<Username>ajlopez</Username>
+		<Password>ajlopez</Password>
+	</Tomcat>
+</Technology>

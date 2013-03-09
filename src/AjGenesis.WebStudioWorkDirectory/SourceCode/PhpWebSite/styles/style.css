@@ -1,0 +1,222 @@
+
+BODY {
+	Font-Family: Arial, sans-serif;
+	Font-size: 8pt;
+	Color: black;	
+}
+
+P {
+	Font-Family: Arial, sans-serif;
+	Font-size: 10pt;
+	Color: black;	
+}
+
+H1 {
+	Font-Family: Arial, sans-serif;
+	Font-size: 16pt;
+	color: #000080;
+}
+
+H2 {
+	Font-Family: Arial;
+	Font-size: 12pt;
+	color: #000080;
+}
+
+H3 {
+	Font-Family: Arial;
+	Font-size: 11pt;
+	color: #000080;
+}
+
+A {
+	COLOR: #000080
+}
+A:visited {
+	
+}
+A:active {
+	
+}
+A:hover {
+	COLOR: #ff6600
+}
+
+A.option {
+	color: rgb(0,0,155);
+	text-decoration: none;
+}
+
+A.option:hover {
+	COLOR: #ff0000;
+}
+
+XMP {
+	background: #eeeeee;
+}
+
+.code {
+	background: #f1f1f1;
+}
+
+.sitetitle {
+	font-size: 32pt;
+	color: rgb(0,0,128);
+	font-weight: bold;
+}
+
+.title {
+	Font-Family: Arial;
+	Font-size: 9pt;
+	font-weight: normal;
+	color: #000080;
+	background: #aaaaaa;
+}
+
+.normal {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; LINE-HEIGHT: 12px; FONT-FAMILY: Verdana, Helvetica, sans-serif
+}
+
+.form {
+	background: black;
+}
+
+.report {
+	background: black;
+}
+
+.top {
+	background: rgb(255,255,255);
+	color: rgb(0,0,0);
+	Font-Family: Arial;
+	Font-size: 10pt;
+}
+
+.topheader {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #FFFFFF;
+	background: #000080;
+	text-decoration: none;
+}
+
+.left {
+	background: #eeeeee;
+}
+
+.datum {
+	Font-Family: Verdana, Arial, Helvetica;
+	Font-size: 9pt;
+	color: rgb(0,0,128);
+	background: rgb(230,230,230);
+}
+
+.legend {
+	Font-Family: Verdana, Arial, Helvetica;
+	Font-size: 9pt;
+	color: rgb(0,0,0);
+	background: rgb(210,210,210);
+}
+
+.option {
+	Font-Family: Arial;
+	Font-size: 10pt;
+	color: rgb(255,255,255);
+	background: #c0c0c0;
+/*	background: #FFBB77; */
+/*	background: rgb(210,210,255); */
+}
+
+.text {
+	Font-Family: Verdana, Arial, Helvetica;
+	Font-size: 9pt;
+	color: rgb(0,0,128);
+}
+
+.bottom {
+	Font-Family: Verdana, Arial, Helvetica;
+	Font-size: 9pt;
+	background: #c0c0c0;
+	color: rgb(0,0,0);
+}
+
+.pagetext {
+	Font-Family: Verdana, Arial;
+	Font-size: 10pt;
+	Color: black;	
+}
+
+.menu {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #000000;
+	text-decoration: none;	
+	background: black;
+}
+
+.menutitle {
+	color: #000080;
+	background: #bbbbbb;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	letter-spacing: 0.05em;
+	text-decoration: none;
+}
+
+.menuoption {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: #000000;
+	background: #ffffff;
+	text-decoration: none;
+	letter-spacing: 0.05em;
+	line-height: 1.4;
+}
+
+.menuopcion:visited {
+	color: #000000;
+	text-decoration: none;
+}
+
+.menuopcion:active {
+	color: rgb(0,54,99);
+	text-decoration: none;
+}
+
+.newstitle {
+	Font-Family: Arial;
+	Font-size: 12pt;
+	Color: rgb(0,0,153);
+}
+
+.newsabstract {
+	Font-Family: Arial;
+	Font-size: 11pt;
+	Color: black;	
+}
+
+.news {
+	Font-Family: Verdana, Arial;
+	Font-size: 9pt;
+	Color: black;	
+}
+
+.prodsdescription {
+	Font-Family: Arial;
+	Font-size: 12pt;
+	Color: rgb(0,0,153);
+}
+
+.prodsdetails {
+	Font-Family: Arial;
+	Font-size: 10pt;
+	Color: black;
+}
+
+.prodsprice {
+	Font-Family: Arial;
+	Font-size: 10pt;
+	Color: black;
+	font-weight: bold;
+}
+

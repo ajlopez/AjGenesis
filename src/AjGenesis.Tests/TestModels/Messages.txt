@@ -1,0 +1,5 @@
+Messages
+	Message = "Message1"
+	Message = "Message2"
+	Message = "Message3"
+End Messages

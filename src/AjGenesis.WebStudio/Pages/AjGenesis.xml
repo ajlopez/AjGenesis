@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DynamicPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Code>AjGenesis</Code>
+  <Title>AjGenesis Project</Title>
+  <Content>[[http://www.ajlopez.com/ajgenesis|AjGenesis]] an open source project, written in VB.NET 2.0.
+
+[[image:http://www.ajlopez.com/ajgenesis/AjGenesisDrawings01-01.gif]]
+
+You can download the latests version from [[http://www.codeplex.com/ajgenesis|Codeplex AjGenesis Page]].
+
+There is a web discussion forum at [[http://www.codeplex.com/ajgenesis/Thread/List.aspx|CodePlex]] (English language).
+
+There is a [[http://groups.google.com/group/codegeneration?hl=es|Code Generation Google Group]] (Spanish language) to discuss different strategies to code generation.
+</Content>
+</DynamicPage>

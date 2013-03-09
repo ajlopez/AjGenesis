@@ -1,0 +1,26 @@
+
+Sub TransformFile(tpl, target, tm, env)
+	if System.IO.File.Exists(target) then
+		target2 = target & ".tmp"
+		tm.Transform(tpl, target2, env)
+		content1 = System.IO.File.ReadAllText(target)
+		content2 = System.IO.File.ReadAllText(target2)
+		if content1 <> content2 then
+			Message "Updating ${target}"
+			System.IO.File.Copy(target2, target, true)
+		end if
+		System.IO.File.Delete(target2)
+	else
+		Message "Creating ${target}"
+		tm.Transform(tpl, target, env)
+	end if
+End Sub
+
+Sub TransformNewFile(tpl, target, tm, env)
+	if System.IO.File.Exists(target) then
+		return
+	else
+		Message "Creating ${target}"
+		tm.Transform(tpl, target, env)
+	end if
+End Sub

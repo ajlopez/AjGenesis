@@ -1,0 +1,17 @@
+<#
+message "Creating SQL Scripts..."
+
+FileManager.CreateDirectory("${Project.BuildDir}/Sql")
+
+for each Model in Project.Models
+
+	for each Entity in Model.Entities
+		PrintLine "Processing Entity " + Entity.Name
+	
+		TransformerManager.Transform("Templates/MySql/EntitySql.tpl","${Project.BuildDir}/Sql/${Entity.Name}.sql",Environment)
+	end for
+end for
+
+TransformerManager.Transform("Templates/MySql/EntitiesSql.tpl","${Project.BuildDir}/Sql/Database.sql",Environment)
+TransformerManager.Transform("Templates/MySql/CreateDatabase.tpl","${Project.BuildDir}/Sql/CreateDatabase.bat",Environment)
+#>

@@ -1,0 +1,266 @@
+<#
+'
+' Build Project
+'	Complete the Project Data
+'	Project must be loaded in global variable Project
+'
+
+PrintLine "Completing Project ${Project.Name}"
+
+include "Templates/EntityFunctions.tpl"
+include "Templates/Utilities.tpl"
+
+if not Project.Title then
+	Project.Title = Project.Name
+end if
+
+if not Project.Version then
+	Project.Version = "1.0.*"
+end if
+
+if not Project.Language then
+	Project.Language = "en"
+end if
+
+if not Project.SystemName then
+	Project.SystemName = Project.Name
+end if
+
+for each Entity in Project.Model.Entities
+	PrintLine "Completing Entity " + Entity.Name
+
+	for each Property in Entity.Properties
+		PrintLine "Property " & Property.Name
+		if Property.Type="Id" and not Property.SqlType then
+			Property.SqlType="int"
+		end if
+		if Property.SqlType and not Property.SqlColumn then
+			Property.SqlColumn = Property.Name
+		end if
+		if Property.Type="Id" and not Entity.IdProperty then
+			Entity.IdProperty = Property
+		end if
+		if Property.Reference then
+			Entity.HasReferences = true
+			Property.Reference = GetEntity(Project.Model.Entities,Property.Reference)
+			PrintLine "Resolving Reference " + Property.Reference.Name
+			if not Property.Reference.IdProperty then
+				Property.Reference.IdProperty = IdProperty(Property.Reference)
+			end if
+			if not Property.Reference.DescriptorProperty then
+				DescriptorProperty = GetDescriptorProperty(Property.Reference)
+				Property.Reference.DescriptorProperty = DescriptorProperty.Name
+			end if
+			if not Property.Description then
+				Property.Description = Property.Reference.Descriptor
+			end if
+		end if
+
+		if Property.Enumeration then
+			Property.Enumeration = GetItem(Project.Model.Enumerations,Property.Enumeration)			
+		end if
+
+		if not Property.Description then
+			Property.Description = Property.Name
+		end if
+		if not Property.Title then
+			Property.Title = Property.Description
+		end if
+	end for
+end for
+
+for each Entity in Project.Model.Entities
+	if Entity.DescriptorProperty then
+		Entity.DescriptorProperty = GetProperty(Entity,Entity.DescriptorProperty)
+	end if
+
+	for each Relation in Entity.Relations
+		PrintLine "Processing Relation " & Relation.Name
+		if Relation.Entity then
+			Relation.Entity = GetEntity(Project.Model.Entities,Relation.Entity)
+		end if
+	end for
+end for
+
+for each Entity in Project.Model.Entities
+	for each Property in Entity.Properties where Property.Reference
+		AddReferenceRelation(Entity,Property.Reference,Property)		
+	end for
+end for
+
+for each List in Project.Model.Lists
+	List.Entity = GetEntity(Project.Model.Entities,List.Entity)
+
+	if not List.Entity.Lists then
+		List.Entity.Lists = CreateList()
+	end if
+
+	List.Entity.Lists.Add(List)
+
+	if not List.Entity.List then
+		List.Entity.List = List
+	end if
+
+	if not List.Title then
+		List.Title = List.Entity.SetDescriptor
+	end if
+
+	if not List.Name then
+		List.Name = List.Entity.Name & "List"
+	end if
+
+	if not List.QueryName then
+		List.QueryName = "View"
+	end if
+
+	if not List.Columns then
+		List.Columns = CreateList()
+
+		for each Property in List.Entity.Properties
+			col = CreateObject()
+			col.Property = Property.Name
+			List.Columns.Add(col)
+		end for
+	end if
+	
+	for each Column in List.Columns
+		Column.Property = GetProperty(List.Entity,Column.Property)
+		if not Column.Title then
+			Column.Title = Column.Property.Description
+		end if
+	end for
+end for
+
+for each View in Project.Model.Views
+	View.Entity = GetEntity(Project.Model.Entities,View.Entity)
+
+	if not View.Entity.Views then
+		View.Entity.Views = CreateList()
+	end if
+
+	View.Entity.Views.Add(View)
+
+	if not View.Title then
+		View.Title = View.Entity.Descriptor
+	end if
+
+	if not View.Name then
+		View.Name = View.Entity.Name & "View"
+	end if
+
+	if not View.Fields then
+		View.Fields = CreateList()
+	
+		for each Property in View.Entity.Properties
+			fld = CreateObject()
+			fld.Property = Property.Name
+			View.Fields.Add(fld)
+		end for
+	end if
+
+	for each Field in View.Fields
+		Field.Property = GetProperty(View.Entity,Field.Property)
+		if not Field.Description then
+			Field.Description = Field.Property.Description
+		end if
+		if not Field.Type then
+			Field.Type = "Text"
+		end if
+	end for
+
+	for each List in View.Lists
+		if List.Relation then
+			List.Relation = GetRelation(View.Entity,List.Relation)
+			PrintLine "Processing Relation " & List.Relation.Name
+			List.Entity = List.Relation.Entity
+			List.KeyProperty = List.Relation.KeyProperty
+			if not List.Order then
+				List.Order = List.Relation.Order
+			end if
+		else
+			List.Entity = GetEntity(Project.Model.Entities,List.Entity)
+		end if
+
+		if not List.Title then
+			List.Title = List.Entity.SetDescriptor
+		end if
+
+		if List.KeyProperty then
+			List.KeyProperty = GetProperty(List.Entity,List.KeyProperty)
+		end if         
+
+		if not List.Columns then
+			List.Columns = CreateList()
+
+			for each Property in List.Entity.Properties
+				col = CreateObject()
+				col.Property = Property.Name
+				List.Columns.Add(col)
+			end for
+		end if
+	
+		for each Column in List.Columns
+			Column.Property = GetProperty(List.Entity,Column.Property)
+			if not Column.Title then
+				Column.Title = Column.Property.Description
+			end if
+		end for
+	end for
+end for
+
+for each Form in Project.Model.Forms
+	Form.Entity = GetEntity(Project.Model.Entities,Form.Entity)
+
+	if not Form.Entity.Forms then
+		Form.Entity.Forms = CreateList()
+	end if
+
+	Form.Entity.Forms.Add(Form)
+
+	if not Form.Name then
+		Form.Name = Form.Entity.Name & "Form"
+	end if
+
+	if not Form.Title then
+		Form.Title = "Actualiza " & Form.Entity.Descriptor
+	end if
+
+	if not Form.NewTitle then
+		Form.NewTitle = "Nuevo " & Form.Entity.Descriptor
+	end if
+	
+	if not Form.Fields then
+		Form.Fields = CreateList()
+	
+		for each Property in Form.Entity.Properties
+			fld = CreateObject()
+			fld.Property = Property.Name
+			Form.Fields.Add(fld)
+		end for
+	end if
+
+	for each Field in Form.Fields
+		Field.Property = GetProperty(Form.Entity,Field.Property)
+		if not Field.Description then
+			Field.Description = Field.Property.Description
+		end if
+		if not Field.Type then
+			Field.Type = "Text"
+		end if
+		if not Field.Required then
+			Field.Required = false
+		else
+			Field.Required = true
+		end if
+	end for
+end for
+
+for each Enumeration in Project.Model.Enumerations
+	for each Item in Enumeration.Items
+		if not Item.Description then
+			Item.Description = Item.Value
+		end if
+	end for
+end for
+
+#>

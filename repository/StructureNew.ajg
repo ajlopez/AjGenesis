@@ -1,0 +1,20 @@
+IncludeCode("Utilities\DirectoryUtilities.ajg")
+
+if not Name then
+	error "Name parameter is required"
+end if
+
+if not Type then
+	error "Type parameter is required"
+end if
+
+Source = System.IO.Path.Combine(RepositoryPath, "Structures\${Type}")
+
+Target = Name
+
+if not DirectoryExists(Source) then
+	error "Structure '${Type}' not found"
+end if
+
+DirectoryCopyAndExpand(Source, Target)
+

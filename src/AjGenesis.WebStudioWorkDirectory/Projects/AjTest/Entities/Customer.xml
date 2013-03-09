@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Customer</Name>
+	<Description>Customer</Description>
+	<SetName>Customers</SetName>
+	<Descriptor>Customer</Descriptor>
+	<SetDescriptor>Customers</SetDescriptor>
+	<SqlTable>customers</SqlTable>
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Name</Name>
+			<Description>Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+		<Property>
+			<Name>Address</Name>
+			<Description>Address</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+	</Properties>
+</Entity>

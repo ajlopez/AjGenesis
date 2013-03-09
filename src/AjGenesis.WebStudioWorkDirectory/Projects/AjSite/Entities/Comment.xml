@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Comment</Name>
+	<Description>Comment</Description>
+	<SetName>Comments</SetName>
+	<Descriptor>Comment</Descriptor>
+	<SetDescriptor>Comments</SetDescriptor>
+	<SqlTable>comments</SqlTable>
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Title</Name>
+			<Description>Title</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+
+		<Property>
+			<Name>IdItem</Name>
+			<Description>Item</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Item</Reference>
+		</Property>
+
+		<Property>
+			<Name>IdUser</Name>
+			<Description>User</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>User</Reference>
+		</Property>
+
+		<Property>
+			<Name>CreationDate</Name>
+			<Description>Creation Date</Description>
+			<Type>Date</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Content</Name>
+			<Description>Content</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+	</Properties>
+</Entity>

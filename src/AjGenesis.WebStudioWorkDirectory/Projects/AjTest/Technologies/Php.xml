@@ -1,0 +1,14 @@
+<Technology>
+	<Programming>
+		<Dialect>Php</Dialect>
+		<Strategy>Functions</Strategy>
+	</Programming>
+	<Database>
+		<Dialect>MySql</Dialect>
+		<Name>ajtest</Name>
+		<Username>root</Username>
+		<Prefix>ajtest_</Prefix>
+		<Host>localhost</Host>
+		<MySql Dir="c:\xampp\mysql"/>
+	</Database>
+</Technology>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>User</Name>
+	<Description>User</Description>
+	<SetName>Users</SetName>
+	<Descriptor>User</Descriptor>
+	<SetDescriptor>Users</SetDescriptor>
+	<SqlTable>users</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>UserCode</Name>
+			<Description>Code</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(20)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>LastName</Name>
+			<Description>Last Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>FirstName</Name>
+			<Description>First Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+	</Properties>
+</Entity>

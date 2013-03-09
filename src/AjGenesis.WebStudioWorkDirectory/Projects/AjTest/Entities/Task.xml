@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Task</Name>
+	<Description>Task</Description>
+	<SetName>Tasks</SetName>
+	<Descriptor>Task</Descriptor>
+	<SetDescriptor>Tasks</SetDescriptor>
+	<SqlTable>tasks</SqlTable>
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Description>Description</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+		<Property>
+			<Name>IdEmployee</Name>
+			<Description>Employee</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Employee</Reference>
+		</Property>
+		<Property>
+			<Name>IdProject</Name>
+			<Description>Project</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Project</Reference>
+		</Property>
+	</Properties>
+</Entity>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DynamicPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Code>PageEditPageHelp</Code>
+  <Title>Help Edit</Title>
+  <Content>This is a short explanation about edit page options:
+
+&lt;b&gt;Links&lt;/b&gt;
+
+You can link to an external page using:
+
+\[\[\&lt;url\&gt;\]\]
+
+an example, if you write:
+
+\[\[http://www.ajlopez.com\]\]
+
+you get:
+
+[[http://www.ajlopez.com]]
+
+If the url starts with ~/ it will be expanded to the current application path:
+
+\[\[~/Default.aspx\]\]
+
+[[~/Default.aspx]]
+
+
+&lt;b&gt;Link to a Dynamic Page&lt;/b&gt;
+
+You can link to this page using
+
+\[\[PageEditPageHelp\]\]
+
+you get:
+
+[[PageEditPageHelp]]
+
+&lt;b&gt;Text in a Link&lt;/b&gt;
+
+You can add a text in a link, using a | as separator
+
+\[\[PageEditPageHelp|Edit Help\]\]
+
+you get:
+
+[[PageEditPageHelp|Edit Help]]
+
+A text can be added to an URL using the same separator:
+
+\[\[http://www.ajlopez.com/ajgenesis|AjGenesis Project\]\]
+
+[[http://www.ajlopez.com/ajgenesis|AjGenesis Project]]
+
+&lt;b&gt;Using HTML&lt;/b&gt;
+
+You can use HTML &lt;b&gt;at any point&lt;/b&gt;
+
+&lt;b&gt;Breaking lines&lt;/b&gt;
+
+If you enter a empty line, a pair of \&lt;br\&gt; (line break in HTML) will be inserted.
+
+&lt;b&gt;Images&lt;/b&gt;
+
+You can indicate an image using:
+
+\[\[image:\&lt;imageurl\&gt;\]\]
+
+You can give a relative (to the root of this application) address:
+
+\[\[image:images/logo.gif\]\]
+
+
+&lt;b&gt;Using HTML&lt;/b&gt;
+
+&lt;b&gt;Special Characters&lt;/b&gt;
+
+If you need to write one of these characters: \\, \&lt;, \&gt;, \[, \] you must precede it with an slash, as in:
+
+\\\\, \\\&lt;, \\\&gt;, \\\[, \\\]
+
+</Content>
+</DynamicPage>

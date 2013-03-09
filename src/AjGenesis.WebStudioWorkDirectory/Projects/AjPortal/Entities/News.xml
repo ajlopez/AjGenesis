@@ -1,0 +1,49 @@
+<Entity>
+	<Name>News</Name>
+	<Description>News Entity</Description>
+	<SetName>NewsList</SetName>
+	<Descriptor>News</Descriptor>
+	<SetDescriptor>News List</SetDescriptor>
+	<SqlTable>news</SqlTable>
+	
+	<Properties>
+
+		<Property>
+			<Name>Id</Name>
+			<Type>Id</Type>
+		</Property>
+
+		<Property>
+			<Name>Title</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Abstract</Name>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Content</Name>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+		<Property>
+			<Name>ImageFile</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdCategory</Name>
+			<Description>Category</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>NewsCategory</Reference>
+		</Property>
+	</Properties>
+</Entity>
+

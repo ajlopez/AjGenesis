@@ -1,0 +1,13 @@
+<Technology>
+	<Programming>
+		<Dialect>CSharp3</Dialect>
+		<UseWcf>True</UseWcf>
+	</Programming>
+	<Database>
+		<Dialect>MsSql</Dialect>
+		<Name>AjFirstExampleNet3</Name>
+		<Username>sa</Username>
+		<Host>.\SQLEXPRESS</Host>
+		<DataContext>true</DataContext>
+	</Database>
+</Technology>

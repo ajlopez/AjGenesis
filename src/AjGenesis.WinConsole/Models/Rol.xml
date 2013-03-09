@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Entity>
+	<Name>Rol</Name>
+	<Description>Rol</Description>
+	<SetName>Roles</SetName>
+	<Descriptor>Rol</Descriptor>
+	<SetDescriptor>Roles</SetDescriptor>
+	<SqlTable>Roles</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Descripcion</Name>
+			<Description>Descripción</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+	</Properties>
+</Entity>

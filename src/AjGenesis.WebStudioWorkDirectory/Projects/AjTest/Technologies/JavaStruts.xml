@@ -1,0 +1,26 @@
+<Technology>
+	<Programming>
+		<Dialect>JavaStruts</Dialect>
+	</Programming>
+	<WebSite>
+		<Name>ajteststruts</Name>
+	</WebSite>
+	<Database>
+		<Dialect>MySql</Dialect>
+		<Name>ajtest</Name>
+		<Username>root</Username>
+		<Host>localhost</Host>
+		<MySql Dir="c:\xampp\mysql"/>
+		<Prefix>ajtest_</Prefix>
+	</Database>
+	<JDBC>
+		<Driver>com.mysql.jdbc.Driver</Driver>
+		<Subprotocol>mysql</Subprotocol>
+	</JDBC>
+	<Struts Dir="c:\struts-1.2.8-bin"/>	
+	<Tomcat Dir="c:\jakarta-tomcat-5.0.27">
+		<Port>8080</Port>
+		<Username>ajlopez</Username>
+		<Password>ajlopez</Password>
+	</Tomcat>
+</Technology>

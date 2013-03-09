@@ -1,0 +1,43 @@
+<#
+
+PrintLine "Generating Solution ${Project.Name}"
+
+Project.GuidVb = new System.Guid()
+Project.GuidCs = new System.Guid()
+Project.GuidCsCom = new System.Guid()
+Project.GuidVbCom = new System.Guid()
+
+if not Project.Title then
+	Project.Title = Project.Name
+end if
+
+if not Project.Version then
+	Project.Version = "1.0.*"
+end if
+
+PrintLine "Creating Directories"
+
+FileManager.CreateDirectory("${Project.BuildDir}")
+FileManager.CreateDirectory("${Project.BuildDir}\${Technology.Name}")
+FileManager.CreateDirectory("${Project.BuildDir}\${Technology.Name}\${Project.Name}Vb")
+FileManager.CreateDirectory("${Project.BuildDir}\${Technology.Name}\${Project.Name}Vb\My Project")
+FileManager.CreateDirectory("${Project.BuildDir}\${Technology.Name}\${Project.Name}Cs")
+FileManager.CreateDirectory("${Project.BuildDir}\${Technology.Name}\${Project.Name}Cs\Properties")
+
+PrintLine "Creating Solution File"
+
+TransformerManager.Transform("Templates\HelloWorld\Solution.tpl", "${Project.BuildDir}\${Technology.Name}\${Project.Name}.sln", Environment)
+
+PrintLine "Creating VB.Net Project"
+
+TransformerManager.Transform("Templates\HelloWorld\ModuleVb.tpl", "${Project.BuildDir}\${Technology.Name}\${Project.Name}Vb\Module1.vb", Environment)
+TransformerManager.Transform("Templates\HelloWorld\AssemblyInfoVb.tpl", "${Project.BuildDir}\${Technology.Name}\${Project.Name}Vb\My Project\AssemblyInfo.vb", Environment)
+TransformerManager.Transform("Templates\HelloWorld\VbProject.tpl", "${Project.BuildDir}\${Technology.Name}\${Project.Name}Vb\${Project.Name}Vb.vbproj", Environment)
+
+PrintLine "Creating C# Project"
+
+TransformerManager.Transform("Templates\HelloWorld\ClassCs.tpl", "${Project.BuildDir}\${Technology.Name}\${Project.Name}Cs\Program.cs", Environment)
+TransformerManager.Transform("Templates\HelloWorld\AssemblyInfoCs.tpl", "${Project.BuildDir}\${Technology.Name}\${Project.Name}Cs\Properties\AssemblyInfo.cs", Environment)
+TransformerManager.Transform("Templates\HelloWorld\CsProject.tpl", "${Project.BuildDir}\${Technology.Name}\${Project.Name}Cs\${Project.Name}Cs.csproj", Environment)
+
+#>

@@ -1,0 +1,22 @@
+Entities
+
+	Entity Customer
+		Description = "Customer Entity"
+		Properties
+			Property Id Type="Id"
+			Property Name Type="Text"
+			Property Address Type="Text"
+		End Properties
+	End Entity
+
+	Entity Supplier
+		Description = "Supplier Entity"
+		Properties
+			Property Id Type="Id"
+			Property Name Type="Text"
+			Property Address Type="Text"
+		End Properties
+	End Entity
+
+End Entities
+

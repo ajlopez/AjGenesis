@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Recipes Name="Recipes">
+  <Node Name="Hello World">
+    <Recipe Name="Hello World VB.NET Module" Task="Tasks/HelloWorldTask.ajg" Documentation="Tasks/HelloWorldTask.html"/>
+  </Node>
+  <Node Name="VB.NET">
+    <Recipe Name="Entities" Task="Tasks/Task1.ajg" Documentation="Tasks/Task1.html"/>
+    <Recipe Name="Services"/>
+  </Node>
+  <Node Name="CSharp">
+    <Recipe Name="Entities"/>
+    <Recipe Name="Services"/>
+  </Node>
+</Recipes>

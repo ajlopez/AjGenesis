@@ -1,0 +1,97 @@
+<#
+
+include "Templates/JavaStruts/JavaFunctions.tpl"
+include "Templates/Utilities.tpl"
+
+PrintLine "Creating Directories"
+
+Strategy = Project.Technology.Strategy
+
+if not Project.PackageName then
+	Project.PackageName = "com.${Project.CompanyName.ToLower()}.${Project.SystemName.ToLower()}"
+end if
+
+if not Project.PackageDirectory then
+	Project.PackageDirectory = "com/${Project.CompanyName.ToLower()}/${Project.SystemName.ToLower()}"
+end if
+
+if Project.Technology.DatabaseDialect="MySql" then
+	if not Project.Technology.Database.JdbcDriver then
+		Project.Technology.Database.JdbcDriver = "org.gjt.mm.mysql.Driver"
+	end if
+	if not Project.Technology.Database.JdbcUrl then
+		Project.Technology.Database.JdbcUrl = "jdbc:mysql://${Project.Technology.Database.Host}/${Project.Technology.Database.Name}"
+	end if
+end if
+
+if not Technology.WebSite then
+	Technology.WebSite = CreateObject()
+end if
+
+if not Technology.WebSite.Name then
+	Technology.WebSite.Name = Project.SystemName.ToLower()
+end if
+
+FileManager.CreateDirectory("${Project.BuildDir}")
+FileManager.CreateDirectory("${Project.BuildDir}/Src")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Metadata")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Web")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Web/WEB-INF")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Web/WEB-INF/jsp")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Web/WEB-INF/jsp/includes")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/services")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/data")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/model")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/struts")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/struts/actions")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Java/${Project.PackageDirectory}/struts/forms")
+FileManager.CreateDirectory("${Project.BuildDir}/Libraries")
+
+PrintLine "Creating Java Project ${Project.Name}"
+
+TransformerManager.Transform("Templates/JavaStruts/Base.tpl","${Project.BuildDir}/Src/Java/com/ajlopez/${Project.SystemName}/data/Base.java",Environment)
+TransformerManager.Transform("Templates/JavaStruts/DataServices.tpl","${Project.BuildDir}/Src/Java/com/ajlopez/${Project.SystemName}/services/DataServices.java",Environment)
+TransformerManager.Transform("Templates/JavaStruts/JspHeader.tpl","${Project.BuildDir}/Src/Web/WEB-INF/jsp/includes/Header.jsp",Environment)
+TransformerManager.Transform("Templates/JavaStruts/JspFooter.tpl","${Project.BuildDir}/Src/Web/WEB-INF/jsp/includes/Footer.jsp",Environment)
+TransformerManager.Transform("Templates/JavaStruts/WebXml.tpl","${Project.BuildDir}/Src/Metadata/web.xml",Environment)
+TransformerManager.Transform("Templates/JavaStruts/StrutsConfig.tpl","${Project.BuildDir}/Src/Web/WEB-INF/struts-config.xml",Environment)
+
+TransformerManager.Transform("Templates/JavaStruts/AntBuild.tpl","${Project.BuildDir}/build.xml",Environment)
+TransformerManager.Transform("Templates/JavaStruts/BuildProperties.tpl","${Project.BuildDir}/build.properties",Environment)
+
+for each Entity in Project.Model.Entities
+	if not Entity.JavaObjectName then
+		Entity.JavaObjectName = JavaName(Entity)
+	end if
+
+	if not Entity.JavaSetName then
+		Entity.JavaSetName = JavaSetName(Entity)
+	end if
+
+	for each Property in Entity.Properties
+		Property.JavaType = JavaType(Property)
+		Property.JavaSqlType = JavaSqlType(Property)
+		Property.JavaName = JavaName(Property)
+	end for
+end for
+
+for each Entity in Project.Model.Entities
+	TransformerManager.Transform("Templates/JavaStruts/EntityJava.tpl","${Project.BuildDir}/Src/Java/com/ajlopez/${Project.SystemName}/model/${Entity.Name}.java",Environment)
+	TransformerManager.Transform("Templates/JavaStruts/EntityDAO.tpl","${Project.BuildDir}/Src/Java/com/ajlopez/${Project.SystemName}/data/${Entity.Name}DAO.java",Environment)
+	TransformerManager.Transform("Templates/JavaStruts/EntityServices.tpl","${Project.BuildDir}/Src/Java/com/ajlopez/${Project.SystemName}/services/${Entity.Name}Services.java",Environment)
+
+	TransformerManager.Transform("Templates/JavaStruts/EntityActionForm.tpl","${Project.BuildDir}/Src/Java/com/ajlopez/${Project.SystemName}/struts/forms/${Entity.Name}Form.java",Environment)
+	TransformerManager.Transform("Templates/JavaStruts/EntityListAction.tpl","${Project.BuildDir}/Src/Java/com/ajlopez/${Project.SystemName}/struts/actions/${Entity.Name}ListAction.java",Environment)
+
+	TransformerManager.Transform("Templates/JavaStruts/JspEntityList.tpl","${Project.BuildDir}/Src/Web/WEB-INF/jsp/${Entity.Name}List.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaStruts/JspEntityView.tpl","${Project.BuildDir}/Src/Web/WEB-INF/jsp/${Entity.Name}View.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaStruts/JspEntityForm.tpl","${Project.BuildDir}/Src/Web/WEB-INF/jsp/${Entity.Name}Form.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaStruts/JspEntityUpdate.tpl","${Project.BuildDir}/Src/Web/WEB-INF/jsp/${Entity.Name}Update.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaStruts/JspEntityNewForm.tpl","${Project.BuildDir}/Src/Web/WEB-INF/jsp/${Entity.Name}NewForm.jsp",Environment)
+	TransformerManager.Transform("Templates/JavaStruts/JspEntityInsert.tpl","${Project.BuildDir}/Src/Web/WEB-INF/jsp/${Entity.Name}Insert.jsp",Environment)
+
+end for
+
+#>

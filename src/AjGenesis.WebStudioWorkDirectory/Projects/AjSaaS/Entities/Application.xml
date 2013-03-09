@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Application</Name>
+	<Description>Application</Description>
+	<SetName>Applications</SetName>
+	<Descriptor>Application</Descriptor>
+	<SetDescriptor>Applications</SetDescriptor>
+	<SqlTable>applications</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>ApplicationName</Name>
+			<Description>Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(20)</SqlType>
+			<Required>true</Required>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Description>Description</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+
+		<Property>
+			<Name>IdProvider</Name>
+			<Description>Provider</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Provider</Reference>
+		</Property>
+
+	</Properties>
+</Entity>

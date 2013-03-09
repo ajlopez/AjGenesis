@@ -1,0 +1,31 @@
+<#
+'
+' Build Technology
+'	Complete the Technology Data
+'	Project must be loaded in global variable Project
+' 	Technology must be loaded in global variable Technology
+'
+
+Message "Completing Technology in Project ${Project.Name}"
+
+include "Templates/Utilities.tpl"
+
+if not Technology then
+	Technology = CreateObject()
+end if
+
+if not Technology.Programming.Dialect then
+	Technology.Programming.Dialect = "Php"
+end if
+
+if not Technology.Database.Dialect then
+	Technology.Database.Dialect = "MySql"
+end if
+
+if not Project.BuildDir then
+	Project.BuildDir = "${WorkingDir}Build/${Project.Name}/${Technology.Programming.Dialect}"
+end if
+
+message "Project Directory ${Project.BuildDir}"
+
+#>

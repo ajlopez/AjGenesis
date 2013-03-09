@@ -1,0 +1,23 @@
+<Entity>
+	<Name>ProductCategory</Name>
+	<Description>Product Category</Description>
+	<SetName>ProductCategories</SetName>
+	<Descriptor>Product Category</Descriptor>
+	<SetDescriptor>Product Categories</SetDescriptor>
+	<SqlTable>productcategories</SqlTable>
+	
+	<Properties>
+
+		<Property>
+			<Name>Id</Name>
+			<Type>Id</Type>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+	</Properties>
+</Entity>
+

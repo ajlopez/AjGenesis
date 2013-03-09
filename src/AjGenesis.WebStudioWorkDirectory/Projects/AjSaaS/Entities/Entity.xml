@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Entity</Name>
+	<Description>Entity</Description>
+	<SetName>Entities</SetName>
+	<Descriptor>Entity</Descriptor>
+	<SetDescriptor>Entities</SetDescriptor>
+	<SqlTable>entities</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Description>Description</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+		<Property>
+			<Name>EntityName</Name>
+			<Description>Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(20)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Name</Name>
+			<Description>Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>SetName</Name>
+			<Description>Set Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Descriptor</Name>
+			<Description>Descriptor</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>SetDescriptor</Name>
+			<Description>SetDescriptor</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>SqlTable</Name>
+			<Description>Sql Table Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdProvider</Name>
+			<Description>Provider</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Provider</Reference>
+		</Property>
+
+	</Properties>
+</Entity>

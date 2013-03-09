@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>ItemCategory</Name>
+	<Description>ItemCategory</Description>
+	<SetName>ItemsCategories</SetName>
+	<Descriptor>ItemCategory</Descriptor>
+	<SetDescriptor>ItemsCategories</SetDescriptor>
+	<SqlTable>itemscategories</SqlTable>
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdItem</Name>
+			<Description>Item</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Item</Reference>
+		</Property>
+
+		<Property>
+			<Name>IdCategory</Name>
+			<Description>Category</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Category</Reference>
+		</Property>
+	</Properties>
+</Entity>

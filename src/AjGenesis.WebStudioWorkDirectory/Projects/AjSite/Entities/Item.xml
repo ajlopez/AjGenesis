@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Item</Name>
+	<Description>Item</Description>
+	<SetName>Items</SetName>
+	<Descriptor>Item</Descriptor>
+	<SetDescriptor>Items</SetDescriptor>
+	<SqlTable>items</SqlTable>
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Title</Name>
+			<Description>Title</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Description>Description</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+		<Property>
+			<Name>ItemType</Name>
+			<Description>Type of Category</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Link</Name>
+			<Description>External Link</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>DocumentName</Name>
+			<Description>Document</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>DocumentType</Name>
+			<Description>Document Type</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(10)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Content</Name>
+			<Description>Page Content</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Visibility</Name>
+			<Description>Visibility</Description>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Expiration</Name>
+			<Description>Expiration Date</Description>
+			<Type>Date</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+
+		<Property>
+			<Name>CreationDate</Name>
+			<Description>Creation Date</Description>
+			<Type>Date</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdAuthor</Name>
+			<Description>Item Author</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>User</Reference>
+		</Property>
+
+	</Properties>
+</Entity>

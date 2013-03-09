@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Entity>
+	<Name>EmpresaUsuario</Name>
+	<Description>Empresas de Usuario</Description>
+	<SetName>EmpresasUsuarios</SetName>
+	<Descriptor>Empresas de Usuario</Descriptor>
+	<SetDescriptor>Empresas de Usuarios</SetDescriptor>
+	<SqlTable>EmpresasUsuarios</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdEmpresa</Name>
+			<Description>Empresa</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdUsuario</Name>
+			<Description>Usuario</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+	</Properties>
+</Entity>

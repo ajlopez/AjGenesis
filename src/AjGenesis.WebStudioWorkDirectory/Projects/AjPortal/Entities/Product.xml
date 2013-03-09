@@ -1,0 +1,49 @@
+<Entity>
+	<Name>Product</Name>
+	<Description>Product Entity</Description>
+	<SetName>Products</SetName>
+	<Descriptor>Product</Descriptor>
+	<SetDescriptor>Products</SetDescriptor>
+	<SqlTable>products</SqlTable>
+	
+	<Properties>
+
+		<Property>
+			<Name>Id</Name>
+			<Type>Id</Type>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Detail</Name>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Price</Name>
+			<Type>Integer</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdCategory</Name>
+			<Description>Category</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>ProductCategory</Reference>
+		</Property>
+
+		<Property>
+			<Name>ImageFile</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+	</Properties>
+</Entity>
+

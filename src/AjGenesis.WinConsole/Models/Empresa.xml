@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Empresa</Name>
+	<Description>Empresas</Description>
+	<SetName>Empresas</SetName>
+	<Descriptor>Empresa</Descriptor>
+	<SetDescriptor>Empresas</SetDescriptor>
+	<SqlTable>Empresas</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Nombre</Name>
+			<Description>Nombre</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Domicilio</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Localidad</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(30)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>CodPostal</Name>
+			<Description>Código Postal</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(10)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Provincia</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(20)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Pais</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(30)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Telefonos</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Fax</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Email</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>SitioWeb</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+	</Properties>
+</Entity>

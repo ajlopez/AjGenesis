@@ -1,0 +1,20 @@
+<#
+
+PrintLine "Generating Solution ${Project.Name}"
+
+if not Project.Title then
+	Project.Title = Project.Name
+end if
+
+if not Project.Version then
+	Project.Version = "1.0.*"
+end if
+
+PrintLine "Creating Directories"
+
+FileManager.CreateDirectory("${Project.BuildDir}")
+FileManager.CreateDirectory("${Project.BuildDir}\${Technology.Name}")
+
+TransformerManager.Transform("Templates\HelloWorld\ClassJava.tpl", "${Project.BuildDir}\${Technology.Name}\HelloWorld.java", Environment)
+
+#>

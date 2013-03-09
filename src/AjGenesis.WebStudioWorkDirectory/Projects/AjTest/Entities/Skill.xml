@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Skill</Name>
+	<Description>Skill</Description>
+	<SetName>Skills</SetName>
+	<Descriptor>Skill</Descriptor>
+	<SetDescriptor>Skills</SetDescriptor>
+	<SqlTable>skills</SqlTable>
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Description</Name>
+			<Description>Description</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+			<Required>true</Required>
+		</Property>
+	</Properties>
+</Entity>

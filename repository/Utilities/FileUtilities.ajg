@@ -1,0 +1,11 @@
+
+Sub FileCopy(from, to)
+	if System.IO.File.Exists(to) then
+		Message "Updating ${to}"
+	else
+		Message "Creating ${to}"
+	end if
+
+	System.IO.File.Copy(from, to, true)
+End Sub
+

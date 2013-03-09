@@ -1,0 +1,222 @@
+<#
+
+include "Templates/Utilities.tpl"
+include "Templates/VbNet/UtilitiesVb.tpl"
+
+message "Creating Directories..."
+
+FileManager.CreateDirectory(Project.BuildDir)
+FileManager.CreateDirectory("${Project.BuildDir}/Sql")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/Libraries")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Entities")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Data")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Services")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Business")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebServices")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.RemoteServices")
+
+message "Defining Solution and Projects..."
+
+Project.Solution = CreateObject()
+Project.Solution.Guid = "F184B08F-C81C-45F6-A57F-5ABD9991F28F"
+
+Project.Solution.Projects = CreateList()
+
+message "Defining Entities Project..."
+
+PrjEntities = CreateObject()
+PrjEntities.Name = "${Project.Name}.Entities"
+PrjEntities.Directory = "${Project.BuildDir}/Src/${Project.Name}.Entities"
+PrjEntities.Includes = CreateList()
+PrjEntities.Guid = CreateGuid()
+
+Project.Solution.Projects.Add(PrjEntities)
+
+PrjData = CreateObject()
+PrjData.Name = "${Project.Name}.Data"
+PrjData.Directory = "${Project.BuildDir}/Src/${Project.Name}.Data"
+PrjData.Includes = CreateList()
+PrjData.Projects = CreateList()
+PrjData.Libraries = CreateList()
+PrjData.Guid = CreateGuid()
+
+PrjData.Libraries.Add(CreateFileLib("AjFramework.Core","..\Libraries\AjFramework.Core.dll"))
+PrjData.Libraries.Add(CreateFileLib("AjFramework.Data","..\Libraries\AjFramework.Data.dll"))
+
+Project.Solution.Projects.Add(PrjData)
+
+PrjServices = CreateObject()
+PrjServices.Name = "${Project.Name}.Services"
+PrjServices.Directory = "${Project.BuildDir}/Src/${Project.Name}.Services"
+PrjServices.Includes = CreateList()
+PrjServices.Projects = CreateList()
+PrjServices.Libraries = CreateList()
+PrjServices.Guid = CreateGuid()
+
+PrjServices.Libraries.Add(CreateFileLib("AjFramework.Data","..\Libraries\AjFramework.Data.dll"))
+
+Project.Solution.Projects.Add(PrjServices)
+
+PrjWeb = CreateObject()
+PrjWeb.Name = "${Project.Name}.WebClient"
+PrjWeb.Directory = "${Project.BuildDir}/Src/${Project.Name}.WebClient"
+PrjWeb.Includes = CreateList()
+PrjWeb.Projects = CreateList()
+PrjWeb.Guid = CreateGuid()
+PrjWeb.ProjectType = "Web"
+
+Project.Solution.Projects.Add(PrjWeb)
+
+PrjWebServices = CreateObject()
+PrjWebServices.Name = "${Project.Name}.WebServices"
+PrjWebServices.Directory = "${Project.BuildDir}/Src/${Project.Name}.WebServices"
+PrjWebServices.Includes = CreateList()
+PrjWebServices.Projects = CreateList()
+PrjWebServices.Guid = CreateGuid()
+PrjWebServices.ProjectType = "Web"
+
+'Project.Solution.Projects.Add(PrjWebServices)
+
+PrjRemoteServices = CreateObject()
+PrjRemoteServices.Name = "${Project.Name}.RemoteServices"
+PrjRemoteServices.Directory = "${Project.BuildDir}/Src/${Project.Name}.RemoteServices"
+PrjRemoteServices.Includes = CreateList()
+PrjRemoteServices.Projects = CreateList()
+PrjRemoteServices.Guid = CreateGuid()
+
+Project.Solution.Projects.Add(PrjRemoteServices)
+
+PrjBusiness = CreateObject()
+PrjBusiness.Name = "${Project.Name}.Business"
+PrjBusiness.Directory = "${Project.BuildDir}/Src/${Project.Name}.Business"
+PrjBusiness.Includes = CreateList()
+PrjBusiness.Projects = CreateList()
+PrjBusiness.Guid = CreateGuid()
+
+Project.Solution.Projects.Add(PrjBusiness)
+
+PrjServices.Projects.Add(PrjEntities)
+PrjServices.Projects.Add(PrjBusiness)
+
+PrjData.Projects.Add(PrjEntities)
+
+PrjWeb.Projects.Add(PrjEntities)
+PrjWeb.Projects.Add(PrjServices)
+
+PrjWebServices.Projects.Add(PrjEntities)
+PrjWebServices.Projects.Add(PrjServices)
+
+PrjRemoteServices.Projects.Add(PrjEntities)
+PrjRemoteServices.Projects.Add(PrjServices)
+
+PrjBusiness.Projects.Add(PrjEntities)
+PrjBusiness.Projects.Add(PrjData)
+
+message "Processing Entities..."
+
+for each Entity in Project.Model.Entities
+	PrintLine "Entidad " + Entity.Name
+	
+	for each Property in Entity.Properties
+		if not Property.Description then
+			Property.Description = Property.Name
+		end if
+	end for
+	
+	TransformerManager.Transform("Templates/VbNet/EntityVb.tpl","${Project.BuildDir}/Src/${Project.Name}.Entities/${Entity.Name}.vb",Environment)
+	PrjEntities.Includes.Add(CreateFileVb("${Entity.Name}"))
+	TransformerManager.Transform("Templates/VbNet/EntityDataVb.tpl","${Project.BuildDir}/Src/${Project.Name}.Data/${Entity.Name}Data.vb",Environment)
+	PrjData.Includes.Add(CreateFileVb("${Entity.Name}Data"))
+	TransformerManager.Transform("Templates/VbNet/EntityWebVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${Entity.Name}.aspx",Environment)
+	PrjWeb.Includes.Add(CreateFileAspx("${Entity.Name}"))
+	TransformerManager.Transform("Templates/VbNet/EntityCodeWebVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${Entity.Name}.aspx.vb",Environment)
+	PrjWeb.Includes.Add(CreateFileAspxVb("${Entity.Name}"))
+	PrjWeb.Includes.Add(CreateFileAspxResx("${Entity.Name}"))
+	TransformerManager.Transform("Templates/VbNet/EntitySetWebVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${Entity.SetName}.aspx",Environment)
+	PrjWeb.Includes.Add(CreateFileAspx("${Entity.SetName}"))
+	TransformerManager.Transform("Templates/VbNet/EntitySetCodeWebVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${Entity.SetName}.aspx.vb",Environment)
+	PrjWeb.Includes.Add(CreateFileAspxVb("${Entity.SetName}"))
+	PrjWeb.Includes.Add(CreateFileAspxResx("${Entity.SetName}"))
+
+	TransformerManager.Transform("Templates/VbNet/EntityFormWebVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${Entity.Name}Update.aspx",Environment)
+	PrjWeb.Includes.Add(CreateFileAspx("${Entity.Name}Update"))
+	TransformerManager.Transform("Templates/VbNet/EntityFormCodeWebVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${Entity.Name}Update.aspx.vb",Environment)
+	PrjWeb.Includes.Add(CreateFileAspxVb("${Entity.Name}Update"))
+	PrjWeb.Includes.Add(CreateFileAspxResx("${Entity.Name}Update"))
+
+	TransformerManager.Transform("Templates/VbNet/EntityDeleteWebVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${Entity.Name}Delete.aspx",Environment)
+	PrjWeb.Includes.Add(CreateFileAspx("${Entity.Name}Delete"))
+	TransformerManager.Transform("Templates/VbNet/EntityDeleteCodeWebVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${Entity.Name}Delete.aspx.vb",Environment)
+	PrjWeb.Includes.Add(CreateFileAspxVb("${Entity.Name}Delete"))
+	PrjWeb.Includes.Add(CreateFileAspxResx("${Entity.Name}Delete"))
+
+	FileManager.CopyFile("${WorkingDir}Templates/VbNet/Resx.txt","${Project.BuildDir}/Src/${Project.Name}.WebClient/${Entity.Name}Update.aspx.resx")
+	TransformerManager.Transform("Templates/VbNet/EntityServiceVb.tpl","${Project.BuildDir}/Src/${Project.Name}.Services/${Entity.Name}Service.vb",Environment)
+	PrjServices.Includes.Add(CreateFileVb("${Entity.Name}Service"))
+	TransformerManager.Transform("Templates/VbNet/EntityComponentVb.tpl","${Project.BuildDir}/Src/${Project.Name}.Business/${Entity.Name}Component.vb",Environment)
+	PrjBusiness.Includes.Add(CreateFileVb("${Entity.Name}Component"))
+	TransformerManager.Transform("Templates/VbNet/EntityComponentBaseVb.tpl","${Project.BuildDir}/Src/${Project.Name}.Business/${Entity.Name}ComponentBase.vb",Environment)
+	PrjBusiness.Includes.Add(CreateFileVb("${Entity.Name}ComponentBase"))
+	TransformerManager.Transform("Templates/VbNet/EntityWebServiceVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebServices/${Entity.Name}WebService.asmx",Environment)
+	PrjWebServices.Includes.Add(CreateFileAsmx("${Entity.Name}WebService"))
+	TransformerManager.Transform("Templates/VbNet/EntityCodeWebServiceVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebServices/${Entity.Name}WebService.asmx.vb",Environment)
+	PrjWebServices.Includes.Add(CreateFileAsmxVb("${Entity.Name}WebService"))
+	PrjWebServices.Includes.Add(CreateFileAsmxResx("${Entity.Name}WebService"))
+	TransformerManager.Transform("Templates/VbNet/EntityRemoteServiceVb.tpl","${Project.BuildDir}/Src/${Project.Name}.RemoteServices/${Entity.Name}RemoteService.vb",Environment)
+	PrjRemoteServices.Includes.Add(CreateFileVb("${Entity.Name}RemoteService"))
+end for
+
+if Project.Model.Enumerations then
+	TransformerManager.Transform("Templates/VbNet/Enumerations.tpl","${Project.BuildDir}/Src/${Project.Name}.Entities/Enumerations.vb",Environment)
+	PrjEntities.Includes.Add(CreateFileVb("Enumerations"))
+end if
+
+TransformerManager.Transform("Templates/VbNet/HeaderAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Header.ascx",Environment)
+TransformerManager.Transform("Templates/VbNet/HeaderAscxVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Header.ascx.vb",Environment)
+FileManager.CopyFile("${WorkingDir}Templates/VbNet/Resx.txt","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Header.ascx.resx")
+PrjWeb.Includes.Add(CreateFileAscx("Header"))
+
+TransformerManager.Transform("Templates/VbNet/FooterAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Footer.ascx",Environment)
+TransformerManager.Transform("Templates/VbNet/FooterAscxVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Footer.ascx.vb",Environment)
+FileManager.CopyFile("${WorkingDir}Templates/VbNet/Resx.txt","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Footer.ascx.resx")
+PrjWeb.Includes.Add(CreateFileAscx("Footer"))
+
+TransformerManager.Transform("Templates/VbNet/TitleAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Title.ascx",Environment)
+TransformerManager.Transform("Templates/VbNet/TitleAscxVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Title.ascx.vb",Environment)
+FileManager.CopyFile("${WorkingDir}Templates/VbNet/Resx.txt","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Title.ascx.resx")
+PrjWeb.Includes.Add(CreateFileAscx("Title"))
+
+TransformerManager.Transform("Templates/VbNet/SubtitleAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Subtitle.ascx",Environment)
+TransformerManager.Transform("Templates/VbNet/SubtitleAscxVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Subtitle.ascx.vb",Environment)
+FileManager.CopyFile("${WorkingDir}Templates/VbNet/Resx.txt","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Subtitle.ascx.resx")
+PrjWeb.Includes.Add(CreateFileAscx("Subtitle"))
+
+TransformerManager.Transform("Templates/VbNet/GlobalAsax.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Global.asax",Environment)
+TransformerManager.Transform("Templates/VbNet/GlobalAsaxVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Global.asax.vb",Environment)
+TransformerManager.Transform("Templates/VbNet/GlobalAsaxResx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Global.asax.resx",Environment)
+
+TransformerManager.Transform("Templates/VbNet/DefaultAspx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Default.aspx",Environment)
+TransformerManager.Transform("Templates/VbNet/DefaultAspxVb.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Default.aspx.vb",Environment)
+FileManager.CopyFile("${WorkingDir}Templates/VbNet/Resx.txt","${Project.BuildDir}/Src/${Project.Name}.WebClient/Default.aspx.resx")
+
+TransformerManager.Transform("Templates/VbNet/WebConfig.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Web.config",Environment)
+TransformerManager.Transform("Templates/VbNet/StylesCss.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Styles.css",Environment)
+
+for each VbProject in Project.Solution.Projects
+	TransformerManager.Transform("Templates/VbNet/VbProject.tpl", "${VbProject.Directory}/${VbProject.Name}.vbproj", Environment)
+end for
+
+VbProject=PrjWebServices
+TransformerManager.Transform("Templates/VbNet/VbProject.tpl", "${VbProject.Directory}/${VbProject.Name}.vbproj", Environment)
+
+VbProject=PrjRemoteServices
+TransformerManager.Transform("Templates/VbNet/VbProject.tpl", "${VbProject.Directory}/${VbProject.Name}.vbproj", Environment)
+
+TransformerManager.Transform("Templates/VbNet/Solution.tpl", "${Project.BuildDir}/Src/${Project.Name}.sln", Environment)
+
+FileManager.CopyDirectory("${WorkingDir}Libraries/AjFramework","${Project.BuildDir}/Src/Libraries")
+
+
+#>

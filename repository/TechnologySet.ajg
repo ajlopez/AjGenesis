@@ -1,0 +1,36 @@
+IncludeCode('Utilities/DirectoryUtilities.ajg')
+
+if not Type then
+	error "Parameter Type is required"
+end if
+
+if not Metamodel then
+	Metamodel = "Entities1"
+end if
+
+modelfile = System.IO.Path.Combine("${RepositoryPath}\Metamodels\${Metamodel}\Technologies\${Type}", "Technology.xml")
+extension = ".xml"
+
+if not System.IO.File.Exists(modelfile) then
+	modelfile = System.IO.Path.Combine("${RepositoryPath}\Metamodels\${Metamodel}\Technologies\${Type}", "Technology.txt")
+	extension = ".txt"
+end if
+
+if not System.IO.File.Exists(modelfile) then
+	modelfile = "${RepositoryPath}\Metamodels\${Metamodel}\Technologies\Technology${Type}.xml"
+	extension = ".xml"
+end if
+
+if not System.IO.File.Exists(modelfile) then
+	modelfile = "${RepositoryPath}\Metamodels\${Metamodel}\Technologies\Technology${Type}.txt"
+	extension = ".txt"
+end if
+
+if not System.IO.File.Exists(modelfile) then
+	Error "Unknown Technology: " + Type
+end if
+
+DirectoryCreate("Models")
+
+System.IO.File.Copy(modelfile, "Models\Technology${extension}",true)
+

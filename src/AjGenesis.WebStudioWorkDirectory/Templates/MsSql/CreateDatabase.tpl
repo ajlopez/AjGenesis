@@ -1,0 +1,1 @@
+isql -E <${Project.BuildDir}/Sql/Database.sql

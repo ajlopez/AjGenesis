@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>TenantApplication</Name>
+	<Description>TenantApplication</Description>
+	<SetName>TenantApplications</SetName>
+	<Descriptor>Tenant Application</Descriptor>
+	<SetDescriptor>Tenant Applications</SetDescriptor>
+	<SqlTable>tenantsapplications</SqlTable>
+
+	<Properties>
+
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdTenant</Name>
+			<Description>Tenant</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Tenant</Reference>
+		</Property>
+
+		<Property>
+			<Name>IdApplication</Name>
+			<Description>Application</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Application</Reference>
+		</Property>
+
+	</Properties>
+</Entity>

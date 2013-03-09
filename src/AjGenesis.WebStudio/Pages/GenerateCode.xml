@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DynamicPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Code>GenerateCode</Code>
+  <Title>Generating Code</Title>
+  <Content>To generate code you need:
+
+- A project, describing the abstract model.
+
+- A technology, describing the implementation details.
+
+- A set of tasks and templates, to apply on model in code 
+generation project.</Content>
+</DynamicPage>

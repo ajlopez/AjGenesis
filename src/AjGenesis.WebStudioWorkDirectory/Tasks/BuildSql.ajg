@@ -1,0 +1,3 @@
+<#
+include "Tasks/Build${Technology.Database.Dialect}.ajg"
+#>

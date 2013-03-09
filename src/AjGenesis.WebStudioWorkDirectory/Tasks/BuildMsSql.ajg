@@ -1,0 +1,8 @@
+<#
+message "Creating SQL Scripts..."
+
+FileManager.CreateDirectory("${Project.BuildDir}/Sql")
+
+TransformerManager.Transform("Templates/MsSql/EntitiesSql.tpl","${Project.BuildDir}/Sql/Database.sql",Environment)
+TransformerManager.Transform("Templates/MsSql/CreateDatabase.tpl","${Project.BuildDir}/Sql/CreateDatabase.bat",Environment)
+#>

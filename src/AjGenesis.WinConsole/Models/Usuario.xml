@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Entity>
+	<Name>Usuario</Name>
+	<Description>Usuario</Description>
+	<SetName>Usuarios</SetName>
+	<Descriptor>Usuario</Descriptor>
+	<SetDescriptor>Usuarios</SetDescriptor>
+	<SqlTable>Usuarios</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Codigo</Name>
+			<Description>Código de Usuario</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(16)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Contrasenia</Name>
+			<Description>Contraseña</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(32)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Nombre</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Apellido</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Email</Name>
+			<Type>Text</Type>
+			<SqlType>varchar(200)</SqlType>
+		</Property>
+	</Properties>
+</Entity>

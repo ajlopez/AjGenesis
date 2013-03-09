@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Entity>
+	<Name>Minuta</Name>
+	<Description>Minuta Contable</Description>
+	<SetName>Minutas</SetName>
+	<Descriptor>Minuta Contable</Descriptor>
+	<SetDescriptor>Minutas Contables</SetDescriptor>
+	<SqlTable>Minutas</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Tipo</Name>
+			<Description>Tipo de Minuta</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(4)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Numero</Name>
+			<Description>Número de Minuta</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(8)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdEjercicio</Name>
+			<Description>Ejercicio</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Fecha</Name>
+			<Description>Fecha</Description>
+			<Type>Date</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+		
+		<Property>
+			<Name>Detalle</Name>
+			<Description>Detalle</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+	</Properties>
+</Entity>

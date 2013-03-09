@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>EmployeeSkill</Name>
+	<Description>EmployeeSkill</Description>
+	<SetName>EmployeeSkills</SetName>
+	<Descriptor>EmployeeSkill</Descriptor>
+	<SetDescriptor>EmployeeSkills</SetDescriptor>
+	<SqlTable>employeeskills</SqlTable>
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdEmployee</Name>
+			<Description>Employee</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Employee</Reference>
+		</Property>
+		<Property>
+			<Name>IdSkill</Name>
+			<Description>Skill</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Skill</Reference>
+		</Property>
+	</Properties>
+</Entity>

@@ -1,0 +1,39 @@
+IncludeCode("Utilities\TransformUtilities.ajg")
+
+Sub DirectoryCopyAndExpand(source, target)
+	DirectoryCreate(target)
+	
+	di = new System.IO.DirectoryInfo(source)
+	
+	for each fi in di.GetFiles()
+		targetfilename = System.IO.Path.Combine(target, fi.Name)
+		
+		if fi.Name.EndsWith(".tpl") then
+			targetfilename = targetfilename.Substring(0, targetfilename.Length-4)
+			Message "Processing " + targetfilename
+			TransformFile(fi.FullName, targetfilename, TransformerManager, Environment)
+		else
+			Message "Processing " + targetfilename
+			System.IO.File.Copy(fi.FullName, targetfilename,true)
+		end if
+	end for
+	
+	for each subdi in di.GetDirectories()
+		newsource = subdi.FullName
+		newtarget = System.IO.Path.Combine(target, subdi.Name)
+		CopyAndExpandDirectory(newsource, newtarget)
+	end for
+End Sub
+
+Sub DirectoryCreate(directory)
+	if DirectoryExists(directory) then
+		return
+	end if
+
+	Message "Creating "+directory
+	System.IO.Directory.CreateDirectory(directory)
+End Sub
+
+Function DirectoryExists(name)
+	return System.IO.Directory.Exists(name)
+End Function

@@ -1,0 +1,12 @@
+<Project>
+  <!--
+		The Project
+	-->
+  <Name>AjFirstExample</Name>
+	<Description>First Example using AjGenesis</Description>
+	<Prefix>AjFE</Prefix>
+	<Domain>com.ajlopez</Domain>
+	<CompanyName>ajlopez</CompanyName>
+	<Model>
+	</Model>
+</Project>

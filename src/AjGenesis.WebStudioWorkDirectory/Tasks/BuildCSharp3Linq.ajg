@@ -1,0 +1,193 @@
+<#
+
+include "Templates/Utilities.tpl"
+include "Templates/CSharp3Linq/UtilitiesCs.tpl"
+include "Templates/CSharp3Linq/CSharpFunctions.tpl"
+
+message "Creating Directories..."
+
+FileManager.CreateDirectory(Project.BuildDir)
+FileManager.CreateDirectory("${Project.BuildDir}/Sql")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Data")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Data/Properties")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Services")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Services/Contracts")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.Services/Properties")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/App_Themes")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/App_Themes/Default")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/Admin")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls")
+FileManager.CreateDirectory("${Project.BuildDir}/Src/${Project.Name}.WebClient/MasterPages")
+
+message "Defining Solution and Projects..."
+
+WebPort = 10000
+
+Project.Solution = CreateObject()
+Project.Solution.Guid = "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC"
+Project.Solution.WebGuid = "E24C65DC-7377-472B-9ABA-BC803B73C61A"
+
+Project.Solution.Projects = CreateList()
+
+message "Defining Data Project..."
+
+PrjData = CreateObject()
+PrjData.Name = "${Project.Name}.Data"
+PrjData.Directory = "${Project.BuildDir}/Src/${Project.Name}.Data"
+PrjData.Includes = CreateList()
+PrjData.Guid = CreateGuid()
+PrjData.COMGuid = CreateGuid()
+
+PrjServices = CreateObject()
+PrjServices.Name = "${Project.Name}.Services"
+PrjServices.Directory = "${Project.BuildDir}/Src/${Project.Name}.Services"
+PrjServices.Includes = CreateList()
+PrjServices.Projects = CreateList()
+PrjServices.Libraries = CreateList()
+PrjServices.Guid = CreateGuid()
+PrjServices.COMGuid = CreateGuid()
+
+PrjServices.Projects.Add(PrjData)
+
+PrjWeb = CreateObject()
+PrjWeb.Name = "${Project.Name}.WebClient"
+PrjWeb.Directory = "${Project.BuildDir}/Src/${Project.Name}.WebClient"
+PrjWeb.Projects = CreateList()
+PrjWeb.Guid = CreateGuid()
+PrjWeb.COMGuid = CreateGuid()
+PrjWeb.ProjectType = "Web"
+PrjWeb.Port = WebPort
+PrjWeb.Address = "localhost:" & WebPort
+WebPort = WebPort + 1
+
+PrjWeb.Projects.Add(PrjServices)
+
+Project.Solution.Projects.Add(PrjData)
+Project.Solution.Projects.Add(PrjServices)
+if PrjGateways then
+	Project.Solution.Projects.Add(PrjGateways)
+end if
+Project.Solution.Projects.Add(PrjWeb)
+if PrjWebSvc then
+	Project.Solution.Projects.Add(PrjWebSvc)
+end if
+
+message "Generating Web Site..."
+
+TransformerManager.Transform("Templates/CSharp3Linq/HomeAspx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Default.aspx",Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/HomeAspxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Default.aspx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp3Linq/HeaderAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Header.ascx",Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/HeaderAscxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Header.ascx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp3Linq/FooterAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Footer.ascx",Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/FooterAscxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Footer.ascx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp3Linq/TitleAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Title.ascx",Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/TitleAscxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Title.ascx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp3Linq/SubtitleAscx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Subtitle.ascx",Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/SubtitleAscxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Controls/Subtitle.ascx.cs",Environment)
+
+TransformerManager.Transform("Templates/CSharp3Linq/GlobalAsax.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Global.asax",Environment)
+
+TransformerManager.Transform("Templates/CSharp3Linq/MasterPageCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/MasterPages/MainMasterPage.master",Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/MasterPageCodeCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/MasterPages/MainMasterPage.master.cs",Environment)
+
+message "Completing Entities..."
+
+for each Entity in Project.Model.Entities
+	PrintLine "Entity " + Entity.Name
+
+	Entity.VarName = Entity.Name.ToLower()
+	Entity.VarSetName = Entity.SetName.ToLower()
+	
+	for each Property in Entity.Properties
+		if not Property.Description then
+			Property.Description = Property.Name
+		end if
+		Property.VarName = Property.Name.ToLower()
+		Property.CsType = CSharpType(Property)
+	end for
+end for
+
+WebPage = CreateObject()
+
+if Technology.Database.DataContext then
+	TransformerManager.Transform("Templates/CSharp3Linq/DataContextCs.tpl","${Project.BuildDir}/Src/${Project.Name}.Data/${Project.Name}DataContext.cs",Environment)
+	PrjData.Includes.Add(CreateFileCs("${Project.Name}DataContext"))
+end if
+
+for each Entity in Project.Model.Entities
+	PrintLine "Entity " + Entity.Name
+	
+	WebPage = CreateObject()
+
+	TransformerManager.Transform("Templates/CSharp3Linq/EntityIStore.tpl","${Project.BuildDir}/Src/${Project.Name}.Data/I${Entity.Name}Store.cs",Environment)
+	PrjData.Includes.Add(CreateFileCs("I${Entity.Name}Store"))
+	TransformerManager.Transform("Templates/CSharp3Linq/EntityStore.tpl","${Project.BuildDir}/Src/${Project.Name}.Data/${Entity.Name}Store.cs",Environment)
+	PrjData.Includes.Add(CreateFileCs("${Entity.Name}Store"))
+	
+	TransformerManager.Transform("Templates/CSharp3Linq/EntityLinqService.tpl","${Project.BuildDir}/Src/${Project.Name}.Services/Linq${Entity.SetName}Service.cs",Environment)
+	PrjServices.Includes.Add(CreateFileCs("Linq${Entity.SetName}Service"))
+	TransformerManager.Transform("Templates/CSharp3Linq/EntityIService.tpl","${Project.BuildDir}/Src/${Project.Name}.Services/Contracts/I${Entity.SetName}Service.cs",Environment)
+	PrjServices.Includes.Add(CreateFileCs("Contracts\I${Entity.SetName}Service"))
+
+'	if Entity.HasReferences then
+'		TransformerManager.Transform("Templates/CSharp3Linq/EntityEntityExService.tpl","${Project.BuildDir}/Src/${Project.Name}.Services/Contracts/${Entity.Name}Ex.cs",Environment)
+'		PrjServices.Includes.Add(CreateFileCs("Contracts\${Entity.Name}Ex"))
+'	end if
+
+	WebPage.Directory = "Admin"
+	WebPage.Prefix = "Admin_"
+	
+	TransformerManager.Transform("Templates/CSharp3Linq/EntityWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.Name}.aspx",Environment)
+	TransformerManager.Transform("Templates/CSharp3Linq/EntitySetWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.SetName}.aspx",Environment)	
+	TransformerManager.Transform("Templates/CSharp3Linq/EntityFormWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.Name}Update.aspx",Environment)
+	
+	TransformerManager.Transform("Templates/CSharp3Linq/EntityCodeWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.Name}.aspx.cs",Environment)
+	TransformerManager.Transform("Templates/CSharp3Linq/EntitySetCodeWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.SetName}.aspx.cs",Environment)
+	TransformerManager.Transform("Templates/CSharp3Linq/EntityFormCodeWebCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/${Entity.Name}Update.aspx.cs",Environment)
+end for
+
+CsWebProject = PrjWeb
+TransformerManager.Transform("Templates/CSharp3Linq/WebConfig.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/Web.config",Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/StylesCss.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/App_Themes/Default/Styles.css",Environment)
+
+if PrjWebSvc.Includes then
+	CsWebProject = PrjWebSvc
+	if CsWebProject.Includes then
+		TransformerManager.Transform("Templates/CSharp3Linq/WebConfig.tpl","${Project.BuildDir}/Src/${Project.Name}.Services.SvcHost/Web.config",Environment)
+	end if
+end if
+
+if not Technology.Database.DataContext then
+	PrjData.Includes.Add(CreateFileDbml(Project.Name))
+end if
+
+TransformerManager.Transform("Templates/CSharp3Linq/CsSettings.tpl", "${PrjData.Directory}/Properties/Settings.Designer.cs", Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/SettingsXml.tpl", "${PrjData.Directory}/Properties/Settings.settings", Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/AppData.tpl", "${PrjData.Directory}/app.config", Environment)
+
+PrjData.HasSettings = true
+
+for each CsProject in Project.Solution.Projects where CsProject.ProjectType<>"Web"
+	TransformerManager.Transform("Templates/CSharp3Linq/CsProject.tpl", "${CsProject.Directory}/${CsProject.Name}.csproj", Environment)
+	TransformerManager.Transform("Templates/CSharp3Linq/AssemblyInfoCs.tpl", "${CsProject.Directory}/Properties/AssemblyInfo.cs", Environment)
+end for
+
+WebPage.Directory = "Admin"
+WebPage.Prefix = "Admin_"
+
+TransformerManager.Transform("Templates/CSharp3Linq/DefaultAspx.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/Default.aspx",Environment)
+TransformerManager.Transform("Templates/CSharp3Linq/DefaultAspxCs.tpl","${Project.BuildDir}/Src/${Project.Name}.WebClient/${WebPage.Directory}/Default.aspx.cs",Environment)
+
+for each CsProject in Project.Solution.Projects where CsProject.ProjectType<>"Web"
+	TransformerManager.Transform("Templates/CSharp3Linq/CsProject.tpl", "${CsProject.Directory}/${CsProject.Name}.csproj", Environment)
+	TransformerManager.Transform("Templates/CSharp3Linq/AssemblyInfoCs.tpl", "${CsProject.Directory}/Properties/AssemblyInfo.cs", Environment)
+end for
+
+TransformerManager.Transform("Templates/CSharp3Linq/Solution.tpl", "${Project.BuildDir}/Src/${Project.Name}.sln", Environment)
+
+#>

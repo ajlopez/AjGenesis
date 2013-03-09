@@ -1,0 +1,25 @@
+<Project>
+	<Name>AjSecondExample</Name>
+	<Description>Second Example using AjGenesis</Description>
+	<Prefix>AjSE</Prefix>
+	<Domain>com.ajlopez</Domain>
+	<CompanyName>ajlopez</CompanyName>
+	<Model>
+		<Entities>
+			<Entity Source="Entities/Department.xml"/>
+			<Entity Source="Entities/Employee.xml"/>
+		</Entities>
+		<Lists>
+			<List Entity="Department"/>
+			<List Entity="Employee"/>
+		</Lists>
+		<Forms>
+			<Form Entity="Department"/>
+			<Form Entity="Employee"/>
+		</Forms>
+		<Views>
+			<View Entity="Department"/>
+			<View Entity="Employee"/>
+		</Views>
+	</Model>
+</Project>

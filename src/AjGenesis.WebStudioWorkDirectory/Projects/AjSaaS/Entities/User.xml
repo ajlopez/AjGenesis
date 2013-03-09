@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>User</Name>
+	<Description>User</Description>
+	<SetName>Users</SetName>
+	<Descriptor>User</Descriptor>
+	<SetDescriptor>Users</SetDescriptor>
+	<SqlTable>users</SqlTable>
+
+	<Properties>
+
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>UserName</Name>
+			<Description>User Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(40)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Password</Name>
+			<Description>Password</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(20)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>LastName</Name>
+			<Description>Last Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>FirstName</Name>
+			<Description>First Name</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Email</Name>
+			<Description>Email</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdTenant</Name>
+			<Description>Tenant</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+			<Reference>Tenant</Reference>
+		</Property>
+
+		<Property>
+			<Name>UserKey</Name>
+			<Description>User Key</Description>
+			<Type>System.Guid</Type>
+			<SqlType>uniqueidentifier</SqlType>
+		</Property>
+
+		<Property>
+			<Name>CreationDate</Name>
+			<Description>Creation Date</Description>
+			<Type>DateTime</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+
+		<Property>
+			<Name>LastActivityDate</Name>
+			<Description>Last Activity Date</Description>
+			<Type>DateTime</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+
+		<Property>
+			<Name>LastLoginDate</Name>
+			<Description>Last Login Date</Description>
+			<Type>DateTime</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+
+		<Property>
+			<Name>LastPasswordChangeDate</Name>
+			<Description>Last Password Change Date</Description>
+			<Type>DateTime</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+
+		<Property>
+			<Name>PasswordQuestion</Name>
+			<Description>Password Question</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(255)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>PasswordAnswer</Name>
+			<Description>Password Answer</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(255)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>PasswordSalt</Name>
+			<Description>PasswordSalt</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Comment</Name>
+			<Description>Comment</Description>
+			<Type>Text</Type>
+			<SqlType>text</SqlType>
+		</Property>
+
+	</Properties>
+</Entity>

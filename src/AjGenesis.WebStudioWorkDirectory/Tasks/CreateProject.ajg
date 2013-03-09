@@ -1,0 +1,13 @@
+
+PrintLine "Creating Project..."
+
+ProjectDir = "${WorkingDir}Projects/${ProjectName}"
+
+FileManager.CreateDirectory(ProjectDir)
+FileManager.CreateDirectory("${ProjectDir}/Technologies")
+
+TransformerManager.Transform("Templates/AjGenesis/Project.tpl","${ProjectDir}/Project.xml",Environment)
+
+
+
+

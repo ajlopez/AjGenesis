@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<Entity>
+	<Name>Ejercicio</Name>
+	<Description>Ejercicios</Description>
+	<SetName>Ejercicios</SetName>
+	<Descriptor>Ejercicio</Descriptor>
+	<SetDescriptor>Ejercicios</SetDescriptor>
+	<SqlTable>Ejercicios</SqlTable>
+
+	<Properties>
+		<Property>
+			<Name>Id</Name>
+			<Description>Id</Description>
+			<Type>Id</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>Descripcion</Name>
+			<Description>Descripción</Description>
+			<Type>Text</Type>
+			<SqlType>varchar(100)</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdEmpresa</Name>
+			<Description>Empresa</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>IdPlanDeCuentas</Name>
+			<Description>Plan de Cuentas</Description>
+			<Type>IdRef</Type>
+			<SqlType>int</SqlType>
+		</Property>
+
+		<Property>
+			<Name>FechaDesde</Name>
+			<Type>Date</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+
+		<Property>
+			<Name>FechaHasta</Name>
+			<Type>Date</Type>
+			<SqlType>datetime</SqlType>
+		</Property>
+	</Properties>
+</Entity>
